@@ -1,0 +1,51 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - '8001:3306'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - '8000:80'
+    volumes:
+      - ./.docker/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./backend/plugins:/var/www/html/wp-content/plugins
+      - ./backend/uploads:/var/www/html/wp-content/uploads
+      - ./backend/futurebrand:/var/www/html/wp-content/themes/futurebrand
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      UPLOAD_LIMIT: 512M
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8002:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - UPLOAD_LIMIT=300M
+    links:
+      - db
+    depends_on:
+      - db
+
+volumes:
+  db_data: {}

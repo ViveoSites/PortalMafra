@@ -1,0 +1,33 @@
+{
+  "name": "futurebrand",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "NODE_ENV='development' gulp watch",
+    "build": "NODE_ENV='production' gulp build"
+  },
+  "keywords": [],
+  "author": "Gerson Lima",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-livereload": "^4.0.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "postcss-import": "^14.1.0",
+    "tailwind-scrollbar": "^1.3.1",
+    "tailwindcss": "^3.1.4",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

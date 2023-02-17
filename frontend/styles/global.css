@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './presets.css';
+@import './carousel.css';
+
+html,
+body {
+  @apply w-full h-full;
+}
+
+body {
+  @apply antialiased font-roboto text-black;
+}
+
+button,
+a {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+strong,
+b {
+  @apply font-bold;
+}
+
+@layer components {
+  .container {
+    @apply px-4 w-full max-w-full md:px-8 lg:px-0 lg:mx-auto lg:w-[90%] lg:max-w-[75rem];
+  }
+}

@@ -1,0 +1,29 @@
+.label {
+  @apply mb-1;
+}
+
+.input {
+  @apply w-full h-12 px-4 placeholder:text-black text-black;
+  @apply rounded-md border outline-none;
+}
+
+.inputTextarea {
+  @apply py-4 h-36 leading-5;
+}
+
+.inputDefault {
+  @apply border-black;
+}
+
+.inputError {
+  @apply bg-white border-danger border-opacity-30 bg-opacity-10;
+}
+
+.btn {
+  @apply ml-auto inline-block h-12 px-10 text-white;
+  @apply rounded-md border outline-none hover:bg-white hover:text-black;
+}
+
+.btn[disabled] {
+  @apply cursor-default opacity-25;
+}

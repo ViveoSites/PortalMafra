@@ -1,0 +1,50 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"sourceType": "module"
+	},
+  "parser": "@typescript-eslint/parser",
+	"plugins": ["simple-import-sort", "react", "@typescript-eslint"],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:react/recommended",
+		"plugin:prettier/recommended",
+		"plugin:sonarjs/recommended",
+		"plugin:unicorn/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:@next/next/recommended"
+	],
+	"rules": {
+		"no-console": "error",
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"simple-import-sort/imports": "error",
+		"unicorn/filename-case": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": ["Link"],
+				"specialLink": ["hrefLeft", "hrefRight"],
+				"aspects": ["invalidHref", "preferButton"]
+			}
+		],
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		]
+	}
+}

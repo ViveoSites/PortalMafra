@@ -1,0 +1,17 @@
+.postbox,
+.postbox-header {
+  border: none;
+}
+
+.postbox .main_bashboard_widget_button {
+  width: 20%;
+}
+
+.postbox .main_bashboard_widget_button a {
+  text-decoration: none !important;
+  color: #afafaf !important;
+}
+
+#dashboard-widgets .postbox .main_bashboard_widget_button h3 {
+  font-family: Helvetica, Verdana, Geneva, Tahoma, sans-serif !important;
+}

@@ -1,0 +1,26 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --danger: #ff4e4e;
+  --success: #409d66;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* font-family: Arial; */
+  font-weight: 700;
+}
+
+p,
+li {
+  font-weight: 400;
+}
+
+p a,
+li a {
+  text-decoration: underline;
+}

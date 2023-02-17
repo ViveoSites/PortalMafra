@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .heading-md,
+  .heading-sm,
+  .heading-xs {
+    @apply font-roboto;
+  }
+
+  .heading-md {
+    @apply text-5xl;
+  }
+
+  .heading-sm {
+    @apply text-3xl;
+  }
+
+  .heading-xs {
+    @apply text-2xl;
+  }
+}
