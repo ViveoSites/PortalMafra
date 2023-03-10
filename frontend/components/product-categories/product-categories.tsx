@@ -3,12 +3,11 @@ import React from 'react'
 
 import Button from '~/components/button'
 import Grid from '~/components/grid'
-import Image from '~/components/image'
 
 interface Properties {
   title: string
   contents: string
-  categories: object
+  categories: any
   columns_number: number
 }
 
@@ -18,7 +17,6 @@ const ProductCategories: React.FC<Properties> = ({
   categories,
   columns_number,
 }) => {
-  console.log(categories)
   return (
     <div className="container my-10">
       <Grid>

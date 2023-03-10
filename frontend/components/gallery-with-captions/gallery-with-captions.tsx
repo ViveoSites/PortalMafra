@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import Slider from 'react-slick'
 
 import Grid from '~/components/grid'
@@ -6,7 +6,7 @@ import Image from '~/components/image'
 import Button from '~/icons/carousel-button.svg'
 
 interface Properties {
-  carousel?: object
+  carousel: any
 }
 
 const GalleryWithCaptions: React.FC<Properties> = ({ carousel }) => {

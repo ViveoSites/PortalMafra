@@ -6,13 +6,13 @@ import Grid from '~/components/grid'
 import RichText from '~/components/rich-text'
 
 interface Properties {
-  colors: object
+  colors: any
   title: string
   tagline: string
   button_label?: string
   button_link?: string
   button_target?: string
-  background_image: object
+  background_image: any
 }
 
 const MainHighlight: React.FC<Properties> = ({

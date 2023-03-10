@@ -3,19 +3,15 @@ import React from 'react'
 import Button from '~/components/button'
 
 interface Properties {
-  colors: object
   title: string
-  tagline: string
   button_label?: string
   button_link?: string
   button_target?: string
-  background_image: object
+  background_image: any
 }
 
 const CallToActionBanner: React.FC<Properties> = ({
-  colors,
   title,
-  tagline,
   background_image,
   button_link,
   button_target,

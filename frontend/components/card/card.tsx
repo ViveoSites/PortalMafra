@@ -5,7 +5,7 @@ import Button from '~/components/button'
 import Image from '~/components/image'
 
 interface Properties {
-  card_image: object
+  card_image: any
   card_title: string
   card_description?: string
   button_label?: string

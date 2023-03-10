@@ -5,7 +5,7 @@ import Button from '~/components/button'
 import Grid from '~/components/grid'
 
 interface Properties {
-  boxes?: object
+  boxes: any
 }
 
 const CallToActionBox: React.FC<Properties> = ({ boxes }) => {

@@ -5,7 +5,7 @@ import Image from '~/components/image'
 import RichText from '~/components/rich-text'
 
 interface Properties {
-  feature_icon: object
+  feature_icon: any
   feature_title: string
   feature_description?: string
   extraClasses?: string

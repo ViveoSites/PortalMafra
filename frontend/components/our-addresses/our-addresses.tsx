@@ -6,7 +6,7 @@ import RichText from '~/components/rich-text'
 
 interface Properties {
   title: string
-  addresses: object
+  addresses: any
 }
 
 const OurAddresses: React.FC<Properties> = ({ title, addresses }) => {

@@ -5,7 +5,7 @@ import Button from '~/components/button'
 import Grid from '~/components/grid'
 
 interface Properties {
-  video: object
+  video: any
   button_label?: string
   button_link?: string
   button_target?: string

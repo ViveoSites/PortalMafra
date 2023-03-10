@@ -5,11 +5,11 @@ import Grid from '~/components/grid'
 import Image from '~/components/image'
 
 interface Properties {
-  background_image: object
-  colors: object
+  background_image: any
+  colors: any
   title: string
   subtitle?: string
-  topics_list: object
+  topics_list: any
 }
 
 const IntegratedTech: React.FC<Properties> = ({
