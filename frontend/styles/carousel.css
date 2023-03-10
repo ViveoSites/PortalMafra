@@ -1,3 +1,38 @@
-.carousel {
-  @apply text-0;
+.carousel .slick-list {
+  overflow: visible !important;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
+}
+
+.slick-slide > div {
+  height: 100% !important;
+}
+
+.carousel-one-item .slick-list,
+.carousel-one-item .slick-track,
+.carousel-one-item .slick-slide,
+.carousel-one-item .slick-slide > div,
+.carousel-one-item .slick-slide img {
+  height: 100% !important;
+}
+
+.carousel-main-banner .slick-list,
+.carousel-main-banner .slick-track,
+.carousel-main-banner .slick-slide,
+.carousel-main-banner .slick-slide > div,
+.carousel-main-banner .slick-slide img {
+  height: 100% !important;
+}
+
+.carousel-business .slick-list,
+.carousel-business .slick-track,
+.carousel-business .slick-slide,
+.carousel-business .slick-slide > div {
+  height: 100% !important;
 }

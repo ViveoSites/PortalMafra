@@ -15,7 +15,7 @@ const Grid: React.FC<Properties> = ({
 }) => {
   return (
     <div
-      className={classNames('grid grid-cols-2 md:grid-cols-12', {
+      className={classNames('grid grid-cols-1 md:grid-cols-12', {
         'gap-x-4': !noGap,
         [className]: !!className,
       })}

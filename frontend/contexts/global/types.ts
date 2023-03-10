@@ -4,6 +4,14 @@ export interface IMenus {
   header: IMenusItem[]
   footer: IMenusItem[]
 }
+
+export interface IOptions {
+  footer_description: any
+  footer_channels: any
+  footer_copyright: any
+  footer: object
+}
+
 export interface IMenusItem {
   id: number
   title: string
@@ -14,6 +22,7 @@ export interface IMenusItem {
 
 export interface GlobalState {
   menus: IMenus
+  options: IOptions
   currentLocale: string
 }
 

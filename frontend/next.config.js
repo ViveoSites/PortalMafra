@@ -20,6 +20,12 @@ const nextConfig = {
   },
   trailingSlash: true,
   images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
     domains: [cmsHostName, 'picsum.photos', 'futurebrand.dev'],
     deviceSizes: [480, 640, 768, 1024, 1280, 1366, 1440, 1920],
   },

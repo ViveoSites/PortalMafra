@@ -14,7 +14,7 @@ const RichText = ({ className = '', htmlText = '' }) => {
     <div className="w-full overflow-hidden">
       <Grid
         noGap={true}
-        className={classNames('relative prose', className)}
+        className={classNames('md:!grid-cols-1 relative prose', className)}
         dangerouslySetInnerHTML={{ __html: filteredHtmlText }}
       />
     </div>

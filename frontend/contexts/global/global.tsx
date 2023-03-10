@@ -11,6 +11,12 @@ const initialState: IGlobalContext = {
       header: [],
       footer: [],
     },
+    options: {
+      footer: [],
+      footer_description: [],
+      footer_channels: [],
+      footer_copyright: [],
+    },
     currentLocale: '',
   },
   setState: () => {},
