@@ -3,8 +3,8 @@ import React from 'react'
 import Card from '~/components/card'
 
 interface Properties {
-  colors: object
-  cards_list: object
+  colors: any
+  cards_list: any
 }
 
 const CardsList: React.FC<Properties> = ({ cards_list, colors }) => {

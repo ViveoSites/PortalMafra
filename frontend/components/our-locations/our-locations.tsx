@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames'
-import Link from 'next/link'
 import React, { useState } from 'react'
 
 import Grid from '~/components/grid'
@@ -9,7 +10,7 @@ import ArrowDown from '~/icons/arrow-accordion-down.svg'
 
 interface Properties {
   title: string
-  units: object
+  units: any
 }
 
 const OurLocations: React.FC<Properties> = ({ title, units }) => {
@@ -56,9 +57,12 @@ const OurLocations: React.FC<Properties> = ({ title, units }) => {
                     <div className="flex px-8 items-center">
                       <span className="text-3xl">{item.title}</span>
                       <ArrowDown
-                        className={classNames('min-w-11 min-h-11 w-11 h-11 ml-auto', {
-                          'rotate-180': selected == index,
-                        })}
+                        className={classNames(
+                          'min-w-11 min-h-11 w-11 h-11 ml-auto',
+                          {
+                            'rotate-180': selected == index,
+                          }
+                        )}
                       />
                     </div>
                   </div>

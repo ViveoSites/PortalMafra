@@ -7,12 +7,12 @@ import Image from '~/components/image'
 import RichText from '~/components/rich-text'
 
 interface Properties {
-  colors: object
+  colors: any
   title: string
   contents: string
   button_label?: string
   button_link?: string
-  featured_image: object
+  featured_image: any
 }
 
 const Video: React.FC<Properties> = ({

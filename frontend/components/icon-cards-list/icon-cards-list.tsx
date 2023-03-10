@@ -4,7 +4,7 @@ import IconCard from '../icon-card/icon-card'
 
 interface Properties {
   columns_number: number
-  features: object
+  features: any
 }
 
 const IconCardsList: React.FC<Properties> = ({ features, columns_number }) => {

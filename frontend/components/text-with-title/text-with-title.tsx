@@ -7,7 +7,7 @@ import RichText from '~/components/rich-text'
 interface Properties {
   title: string
   contents: string
-  colors: object
+  colors: any
 }
 
 const TextWithTitle: React.FC<Properties> = ({ title, contents, colors }) => {

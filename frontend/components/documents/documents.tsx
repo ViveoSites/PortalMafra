@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import classNames from 'classnames'
 import React, { useState } from 'react'
 
@@ -9,7 +12,7 @@ import Download from '~/icons/download.svg'
 interface Properties {
   title: string
   description: string
-  documents: object
+  documents: any
 }
 
 const Documents: React.FC<Properties> = ({ title, description, documents }) => {

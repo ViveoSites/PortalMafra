@@ -7,7 +7,7 @@ import Image from '~/components/image'
 import RichText from '~/components/rich-text'
 
 interface Properties {
-  topics_list: object
+  topics_list: any
 }
 
 const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
@@ -25,10 +25,13 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
               key={`item-${index}`}
             >
               <div
-                className={classNames('flex items-center justify-center col-span-12 md:col-span-5', {
-                  'md:justify-start md:col-start-2': index % 2 == 0,
-                  'md:justify-end md:col-start-7 md:order-1': index % 2 != 0,
-                })}
+                className={classNames(
+                  'flex items-center justify-center col-span-12 md:col-span-5',
+                  {
+                    'md:justify-start md:col-start-2': index % 2 == 0,
+                    'md:justify-end md:col-start-7 md:order-1': index % 2 != 0,
+                  }
+                )}
               >
                 <Image
                   width={item.featured_image.width}
@@ -37,7 +40,7 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
                     'max-w-[300px]': index % 2 == 0,
                     'ml-auto': index % 2 != 0,
                   })}
-                  alt={item.topic_title.replace(/<\/?[^>]+(>|$)/g, "")}
+                  alt={item.topic_title.replace(/<\/?[^>]+(>|$)/g, '')}
                   src={item.featured_image.url}
                 />
               </div>
