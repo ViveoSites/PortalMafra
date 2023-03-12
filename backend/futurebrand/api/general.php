@@ -237,6 +237,8 @@ class ApiGeneral
   {
     if ($data['blockName'] === 'acf/news') {
       return $this->render_block_news($data);
+    } else if ($data['blockName'] === 'acf/product-categories') {
+      return $this->render_block_product_categories($data);
     }
 
     return $data;
@@ -251,6 +253,27 @@ class ApiGeneral
 
     return $data;
   }
+
+  public function render_block_product_categories($data)
+  {
+    if (!isset($data['categories']) || empty($data['categories'])) {
+      return $data;
+    }
+
+    $categories = [];
+
+    // add acf fields on categories
+    foreach ($data['categories'] as $category) {
+      $category = get_term($category, 'product-category');
+      $category->acf = get_fields('product-category_' . $category->term_id);
+      $categories[] = $category;
+    }
+
+    $data['categories'] = $categories;
+
+    return $data;
+  }
+
   public function render_posts_by_posttype($parameters)
   {
     $posts = [];
