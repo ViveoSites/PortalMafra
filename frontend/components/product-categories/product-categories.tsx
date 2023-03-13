@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import Button from '~/components/button'
-import Grid from '~/components/grid'
+import Image from '~/components/image'
 
 interface Properties {
   title: string
@@ -12,47 +11,31 @@ interface Properties {
 }
 
 const ProductCategories: React.FC<Properties> = ({
-  title,
-  contents,
   categories,
   columns_number,
 }) => {
   return (
     <div className="container my-10">
-      <Grid>
-        <div
-          className={classNames(
-            'col-span-12 md:col-span-2 text-[40px] leading-[48px]'
-          )}
-        >
-          {title}
-        </div>
-        <div
-          className={classNames(
-            'col-span-12 md:col-span-4 md:col-start-5 text-base md:text-2xl'
-          )}
-        >
-          {contents}
-        </div>
-      </Grid>
-      <ul className="grid grid-cols-12 gap-x-4 mt-12">
+      <ul className="grid grid-cols-12 gap-x-5 mt-12">
         {categories &&
           categories.map((item, index) => (
             <li
+              style={{ backgroundColor: `${item.acf.background_color}` }}
               className={classNames(
-                `overflow-hidden col-span-12 text-darkness bg-institucionalLight rounded-2xl mb-10 items-center justify-center md:col-span-${
-                  12 / columns_number
-                }`
+                'overflow-hidden col-span-12 text-darkness rounded-2xl mb-10 items-center justify-center',
+                {
+                  [`md:col-span-${12 / columns_number}`]: columns_number,
+                }
               )}
               key={`icon-card-${index}`}
             >
-              {/* <Image
-                width="350"
-                height="310"
+              <Image
+                width={item.acf?.image.width}
+                height={item.acf?.image.height}
                 className="object-cover w-full h-[310px]"
-                alt={card_title}
-                src={card_image.url}
-              /> */}
+                alt={item.name}
+                src={item.acf?.image.url}
+              />
               <div className="md:min-h-[260px] p-8">
                 <div
                   className={classNames(
@@ -64,14 +47,14 @@ const ProductCategories: React.FC<Properties> = ({
                 <div className={classNames('text-base md:text-xl mb-8')}>
                   {item.description}
                 </div>
-                {item.description && (
+                {/* {item.description && (
                   <Button
                     extraClasses="justify-start"
                     label="Saiba mais"
                     link="#"
                     target="_self"
                   />
-                )}
+                )} */}
               </div>
             </li>
           ))}

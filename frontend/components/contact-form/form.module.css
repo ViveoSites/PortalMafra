@@ -1,0 +1,28 @@
+.label {
+  @apply mb-1 text-white text-xl;
+}
+
+.input {
+  @apply w-full h-12 px-4 placeholder:text-black text-black;
+  @apply border-b border-solid border-white bg-transparent outline-none;
+}
+
+.inputTextarea {
+  @apply py-4 h-36 leading-5;
+}
+
+.inputDefault {
+  @apply border-white h-[24px] px-0 text-white;
+}
+
+.inputError {
+  @apply border-danger border-opacity-30 bg-opacity-10;
+}
+
+.btn {
+  @apply ml-auto h-[58px] px-8 py-[18px] text-base bg-white text-darkness flex items-center justify-center rounded-[100px] outline-none border-solid border-[1px] border-white hover:bg-lightness hover:border-darkness;
+}
+
+.btn[disabled] {
+  @apply cursor-default opacity-25;
+}

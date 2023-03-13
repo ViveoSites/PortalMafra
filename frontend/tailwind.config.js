@@ -34,7 +34,7 @@ module.exports = {
       pattern: /columns-(2|3)/,
     },
     {
-      pattern: /(bg|text|border)-(medicamento|darkness|dark|destaque|institucionalDark|institucionalLight|greenLight|greenDarkness)/,
+      pattern: /(bg|text|border)-(medicamento|darkness|lightness|dark|destaque|default|institucionalDark|institucionalLight|greenLight|green|greenDark|greenDarkness)/,
       variants: ['hover'],
     },
   ],
@@ -54,12 +54,17 @@ module.exports = {
       dark: '#3F6B9E',
       darkness: '#20344B',
       medicamento: '#A5A4F0',
+      default: '#3587B7',
       destaque: '#73F7E8',
+      lightness: '#D9EBFF',
       institucionalDark: '#3F6B9E',
       institucionalLight: '#DDECFF',
       neutralLight: '#F0F6FB',
       greenLight: '#BFFFBF',
+      green: '#85EC6E',
+      greenDark: '#19CA03',
       greenDarkness: '#1A6711',
+      purple: '#676AAB',
       orange: {
         50: '#FFE2D8',
         100: '#F4C7B7',
@@ -173,6 +178,7 @@ module.exports = {
       },
       content: {
         arrowRight: 'url("/icons/arrow-right.svg")',
+        darknessArrowRight: 'url("/icons/darkness-arrow-right.svg")',
       },
       fontSize: {
         0: '0px',

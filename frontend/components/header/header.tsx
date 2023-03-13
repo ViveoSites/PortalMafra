@@ -65,7 +65,7 @@ const Header = () => {
         <div
           onClick={() => toggleMenu()}
           className={classNames(
-            'z-20 cursor-pointer md:hidden w-[58px] h-[58px] rounded-full fixed left-5 top-6 flex items-center justify-center',
+            'tap-transparent z-20 cursor-pointer md:hidden w-[58px] h-[58px] rounded-full fixed left-5 top-6 flex items-center justify-center',
             {
               'bg-darkness': !mobileMenuOpen,
               'bg-dark': mobileMenuOpen,
