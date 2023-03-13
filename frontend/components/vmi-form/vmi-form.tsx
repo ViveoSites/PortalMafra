@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup'
 
 import Grid from '~/components/grid'
+import RichText from '~/components/rich-text'
 import DarknessArrowRight from '~/icons/darkness-arrow-right.svg'
 import { sendFormData } from '~/services/forms'
 
@@ -12,10 +13,11 @@ import styles from './form.module.css'
 interface Properties {
   formId: any
   title: string
-  list: any
+  description: string
 }
 
-const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
+const ContactForm: React.FC<Properties> = ({ formId, title, description }) => {
+  const coloredTitle = title.replace('<em>', `<em class="text-destaque">`)
   const FormSchema = Yup.object().shape({
     yourName: Yup.string().required(),
     yourCompany: Yup.string().required(),
@@ -65,16 +67,18 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
   })
 
   return (
-    <div className="bg-lightness">
-      <Grid className="py-20 container px-4">
-        <div className="col-span-12 md:col-span-6 bg-default rounded-[32px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0">
-          <h2
+    <div className="container">
+      <Grid className="py-[60px] md:py-20 mt-10 mb-16 md:mb-[120px] px-4 md:px-10 bg-dark rounded-[32px]">
+        <div className="col-span-12 md:col-span-5 text-white mb-10 md:mb-0">
+          <RichText
+            htmlText={coloredTitle}
             className={classNames(
-              'text-[32px] leading-[40px] md:text-[40px] md:leading-[48px] mb-6 md:mb-10 text-white'
+              'lg:grid-cols-1 text-[32px] text-white leading-[40px] md:text-[40px] md:leading-[48px] mb-6'
             )}
-          >
-            Entre em <i>contato</i>
-          </h2>
+          />
+          <p className={classNames('text-xl')}>{description}</p>
+        </div>
+        <div className="col-span-12 md:col-span-6 md:col-start-7 rounded-[32px] mb-10 md:mb-0">
           <form
             onSubmit={formik.handleSubmit}
             className="relative gap-4"
@@ -218,58 +222,6 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
               )}
             </div>
           </form>
-        </div>
-        <div className="col-span-12 md:col-span-6 bg-white rounded-[16px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0">
-          <h2
-            className={classNames(
-              'text-[32px] leading-[40px] md:text-[40px] md:leading-[48px] mb-6 md:mb-10 text-darkness'
-            )}
-          >
-            {title}
-          </h2>
-          <ul>
-            {list &&
-              list.map((item, index) => (
-                <li
-                  key={`item-${index}`}
-                  className={classNames('grid grid-cols-12 gap-x-4')}
-                >
-                  <h3
-                    className={classNames(
-                      'text-xl md:text-2xl text-dark col-span-12',
-                      {
-                        'mb-4 md:mb-4': index == 0,
-                        'mb-4 md:mb-10': index != 0,
-                      }
-                    )}
-                  >
-                    {item.title}
-                  </h3>
-                  {item.channels &&
-                    item.channels.map((channel, newIndex) => (
-                      <div
-                        className={classNames(
-                          'flex flex-col items-start justify-start text-darkness',
-                          {
-                            'col-span-12 md:col-span-12 mb-6 md:mb-10':
-                              index == 0,
-                            'col-span-6 md:col-span-4 mb-10 md:mb-16':
-                              index != 0,
-                          }
-                        )}
-                        key={`channel-${newIndex}`}
-                      >
-                        {channel.subtitle && (
-                          <div className="text-xl mb-4 min-h-[50px]">
-                            {channel.subtitle}
-                          </div>
-                        )}
-                        <div className="text-base">{channel.description}</div>
-                      </div>
-                    ))}
-                </li>
-              ))}
-          </ul>
         </div>
       </Grid>
     </div>

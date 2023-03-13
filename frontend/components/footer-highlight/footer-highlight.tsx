@@ -5,6 +5,10 @@ import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
+import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
+import GradientCircleBlMobile from '~/icons/gradientborder-circle-bl-mobile.svg'
+import GradientCircleTopRight from '~/icons/gradientborder-circle-tr.svg'
+import GradientCircleTopRightMobile from '~/icons/gradientborder-circle-tr-mobile.svg'
 
 interface Properties {
   colors: any
@@ -65,14 +69,46 @@ const Video: React.FC<Properties> = ({
           </div>
           <div
             className={classNames(
-              'col-span-12 md:col-span-4 md:col-start-9 mb-[40px] md:mb-0 border-1 md:order-2 '
+              'col-span-12 md:col-span-4 md:col-start-9 mb-[40px] md:mb-0 border-1 md:order-2 justify-center md:justify-end flex relative md:-mt-[170px]'
             )}
           >
+            <GradientCircleTopRight
+              className={classNames(
+                'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden md:block',
+                {
+                  [`gradient-${colors.text_color}`]: colors.text_color,
+                }
+              )}
+            />
+            <GradientCircleTopRightMobile
+              className={classNames(
+                'absolute left-10 -top-2 pointer-events-none z-10 object-contain md:hidden',
+                {
+                  [`gradient-${colors.text_color}`]: colors.text_color,
+                }
+              )}
+            />
+            <GradientCircleBl
+              className={classNames(
+                'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden md:block',
+                {
+                  [`gradient-${colors.text_color}`]: colors.text_color,
+                }
+              )}
+            />
+            <GradientCircleBlMobile
+              className={classNames(
+                'absolute right-6 -bottom-2 pointer-events-none z-10 md:hidden',
+                {
+                  [`gradient-${colors.text_color}`]: colors.text_color,
+                }
+              )}
+            />
             <Image
               width={featured_image.width}
               height={featured_image.height}
               className={classNames(
-                'w-full h-[480px] md:h-[640px] object-cover object-center max-w-[350px] md:max-w-[410px] md:-mt-[170px] rounded-[1000px]'
+                'w-full h-[480px] md:h-[640px] object-cover object-center max-w-[350px] md:max-w-[410px] rounded-[1000px]'
               )}
               alt={title}
               src={featured_image.url}

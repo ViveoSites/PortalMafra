@@ -30,10 +30,10 @@ const IntegratedTech: React.FC<Properties> = ({
           src={background_image.url}
         />
       </div>
-      <div className="container my-10 relative -mt-[80px] md:-mt-[320px]">
+      <div className="container px-0 my-10 relative -mt-[80px] md:-mt-[320px]">
         <Grid
           className={classNames(
-            'pt-10 pb-10 md:pt-20 md:pb-40 rounded-[32px]',
+            'pt-10 pb-10 md:pt-20 md:pb-40 rounded-t-[32px] md:rounded-[32px]',
             {
               [`text-${colors.text_color}`]: colors.text_color,
               [`bg-${colors.featured_color}`]: colors.featured_color,
@@ -66,7 +66,7 @@ const IntegratedTech: React.FC<Properties> = ({
                 topics_list.map((item, index) => (
                   <li
                     className={classNames(
-                      'flex flex-row items-start justify-start mb-10 text-xl md:text-2xl'
+                      'flex flex-row items-start justify-start mb-10 last:mb-0 text-xl md:text-2xl'
                     )}
                     key={`item-${index}`}
                   >

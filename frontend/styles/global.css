@@ -8,7 +8,7 @@
 
 html,
 body {
-  @apply w-full h-full;
+  @apply w-full h-full bg-neutralLight;
 }
 
 body {
@@ -34,4 +34,59 @@ b {
 footer::before {
   content: '';
   @apply w-full bg-dark rounded-tl-[32px] rounded-tr-[32px] absolute top-0 left-0 h-8 block -mt-8;
+}
+
+.tap-transparent {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+.gradient-destaque stop:first-of-type,
+.gradient-institucionalLight stop:first-of-type,
+.gradient-institucionalDark stop:first-of-type,
+.gradient-institucionalDark stop:first-of-type,
+.gradient-white stop:first-of-type {
+  stop-color: #73F7E8;
+}
+
+.gradient-destaque stop::nth-child(2),
+.gradient-institucionalLight stop::nth-child(2),
+.gradient-institucionalDark stop::nth-child(2),
+.gradient-institucionalDark stop::nth-child(2),
+.gradient-white stop::nth-child(2) {
+  stop-color: #D9EBFF;
+}
+
+.gradient-greenDarkness stop:first-of-type,
+.gradient-green stop:first-of-type,
+.gradient-greenLight stop:first-of-type {
+  stop-color: #73F7E8;
+}
+.gradient-greenDarkness stop:nth-child(2),
+.gradient-green stop:nth-child(2),
+.gradient-greenLight stop:nth-child(2) {
+  stop-color: #50E657;
+}
+
+.gradient-purple stop:first-of-type {
+  stop-color: #73F7E8;
+}
+.gradient-purple stop:nth-child(2) {
+  stop-color: #7E81DC;
+}
+
+.gradient-accordion-button stop:first-of-type {
+  stop-color: #73F7E8;
+}
+
+.gradient-accordion-button stop:nth-child(2) {
+  stop-color: #D9EBFF;
+}
+
+.gradient-accordion-button-deselected stop:first-of-type {
+  stop-color: #20344B;
+}
+
+.gradient-accordion-button-deselected stop:nth-child(2) {
+  stop-color: #20344B;
 }

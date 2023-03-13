@@ -19,7 +19,7 @@ const IconCard: React.FC<Properties> = ({
 }) => {
   return (
     <li
-      className={`col-span-12 rounded-2xl mb-5 flex flex-col items-start justify-start md:justify-center ${extraClasses}`}
+      className={`col-span-12 rounded-2xl mb-6 md:mb-10 flex flex-col items-start justify-start ${extraClasses}`}
     >
       <Image
         width="32"
@@ -31,7 +31,7 @@ const IconCard: React.FC<Properties> = ({
       <div>
         <div
           className={classNames(
-            'text-left text-2xl md:text-4xl mb-4 text-darkness'
+            'text-left text-2xl md:text-[32px] md:leading-[36px] mb-4 text-darkness'
           )}
         >
           {feature_title}
@@ -39,7 +39,7 @@ const IconCard: React.FC<Properties> = ({
         <RichText
           htmlText={feature_description}
           className={classNames(
-            'lg:grid-cols-1 text-base mb-10 text-darkness text-left'
+            'lg:grid-cols-1 text-base text-darkness text-left'
           )}
         />
       </div>

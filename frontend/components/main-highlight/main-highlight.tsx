@@ -4,6 +4,7 @@ import React from 'react'
 import Button from '~/components/button'
 import Grid from '~/components/grid'
 import RichText from '~/components/rich-text'
+import ArrowDown from '~/icons/arrow-down.svg'
 
 interface Properties {
   colors: any
@@ -13,6 +14,10 @@ interface Properties {
   button_link?: string
   button_target?: string
   background_image: any
+}
+
+const handleScroll = () => {
+  window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
 }
 
 const MainHighlight: React.FC<Properties> = ({
@@ -28,10 +33,11 @@ const MainHighlight: React.FC<Properties> = ({
     '<em>',
     `<em class="text-${colors.featured_color}">`
   )
+
   return (
     <div
       style={{ backgroundImage: `url(${background_image.url})` }}
-      className="bg-100% bg-no-repeat"
+      className="bg-cover bg-[-110px] md:bg-center md:bg-100% bg-no-repeat h-screen"
     >
       <Grid className="container bg-cover bg-no-repeat">
         <div
@@ -60,6 +66,10 @@ const MainHighlight: React.FC<Properties> = ({
           )}
         </div>
       </Grid>
+      <ArrowDown
+        onClick={handleScroll}
+        className="hidden md:block absolute bottom-5 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer"
+      />
     </div>
   )
 }
