@@ -41,19 +41,16 @@ const InternalHighlight: React.FC<Properties> = ({
   return (
     <section
       className={classNames(
-        'internal-highlights bg-[-130px_center] md:bg-center min-h-screen relative',
-        {
-          'md:bg-[length:100%_100%]': highlight_image,
-          'md:bg-cover': !highlight_image,
-        }
+        'internal-highlights bg-[-130px_center] md:bg-center min-h-screen relative'
       )}
     >
       <Image
         {...background_image}
         className={classNames(
-          'absolute object-cover object-center z-10 left-0 top-0 w-full h-full md:block',
+          'absolute object-center z-10 left-0 top-0 w-full h-full md:block',
           {
             hidden: !!mobile_background_image,
+            'object-cover': !highlight_image,
           }
         )}
       />
