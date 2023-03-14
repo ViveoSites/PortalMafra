@@ -2,6 +2,12 @@
 
 # NextJS WordPress Stater | FutureBrand
 
+## Production URLs
+
+- Website URL - [mafrasaude.com.br](https://mafrasaude.com.br)
+- Panel URL - [painelsite.mafrasaude.com.br/painel](https://painelsite.mafrasaude.com.br/painel)
+- API URL - [painelsite.mafrasaude.com.br/api](https://painelsite.mafrasaude.com.br/api)
+
 ## Homolog URLs
 
 - Website URL - [mafra.futurebrand.dev](https://mafra.futurebrand.dev)
