@@ -2,6 +2,12 @@
 
 # NextJS WordPress Stater | FutureBrand
 
+## Homolog URLs
+
+- Website URL - [mafra.futurebrand.dev](https://mafra.futurebrand.dev)
+- Panel URL - [futurebrand.dev/mafra/painel](https://futurebrand.dev/mafra/painel)
+- API URL - [futurebrand.dev/mafra/api](https://futurebrand.dev/mafra/api)
+
 ## Project stack:
 
 - React + [NextJS](https://nextjs.org)
@@ -26,12 +32,6 @@ Studio Code with the following plugins:
 Before running git commit, the rules of ESLint and Stylelint are executed. If
 there is an error or some non-default code of the site will generate an error
 and you will not be able to commit.
-
-## Homolog
-
-- Website URL - [nextjs-wp-starter.futurebrand.dev](https://nextjs-wp-starter.futurebrand.dev)
-- Panel URL - [futurebrand.dev/wp-starter/painel](https://futurebrand.dev/wp-starter/painel)
-- API URL - [futurebrand.dev/wp-starter/api](https://futurebrand.dev/wp-starter/api)
 
 ## Frontend
 
