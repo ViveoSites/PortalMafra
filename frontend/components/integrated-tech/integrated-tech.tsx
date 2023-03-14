@@ -1,8 +1,10 @@
 import classNames from 'classnames'
+import { m } from 'framer-motion'
 import React from 'react'
 
 import Grid from '~/components/grid'
 import Image from '~/components/image'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 
 interface Properties {
   background_image: any
@@ -19,18 +21,20 @@ const IntegratedTech: React.FC<Properties> = ({
   subtitle,
   topics_list,
 }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
   return (
-    <div className="integrated-tech">
-      <div>
+    <section ref={animationRef} className="integrated-tech">
+      <m.div {...topDownShowAnimation()}>
         <Image
-          width="1200"
-          height="680"
           className="object-cover w-full h-[400px] md:h-[680px]"
-          alt={title}
-          src={background_image.url}
+          {...background_image}
         />
-      </div>
-      <div className="container px-0 my-10 relative -mt-[80px] md:-mt-[320px]">
+      </m.div>
+      <m.div
+        {...topDownShowAnimation(0.2)}
+        className="container px-0 my-10 relative -mt-[80px] md:-mt-[320px]"
+      >
         <Grid
           className={classNames(
             'pt-10 pb-10 md:pt-20 md:pb-20 rounded-t-[32px] md:rounded-[32px]',
@@ -64,27 +68,25 @@ const IntegratedTech: React.FC<Properties> = ({
             <ul>
               {topics_list &&
                 topics_list.map((item, index) => (
-                  <li
+                  <m.li
+                    key={`topics-list-item-${index}`}
                     className={classNames(
                       'flex flex-row items-start justify-start mb-10 last:mb-0 text-xl md:text-2xl'
                     )}
-                    key={`item-${index}`}
+                    {...topDownShowAnimation(index * 0.3)}
                   >
                     <Image
-                      width="32"
-                      height="32"
+                      {...item.topic_icon}
                       className="object-contain w-[32px] h-[32px] mr-4"
-                      alt={item.topic_description}
-                      src={item.topic_icon.url}
                     />
                     <p>{item.topic_description}</p>
-                  </li>
+                  </m.li>
                 ))}
             </ul>
           </div>
         </Grid>
-      </div>
-    </div>
+      </m.div>
+    </section>
   )
 }
 

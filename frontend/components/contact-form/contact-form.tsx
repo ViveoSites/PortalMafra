@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import { useFormik } from 'formik'
+import { m } from 'framer-motion'
 import React, { useState } from 'react'
 import * as Yup from 'yup'
 
 import Grid from '~/components/grid'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 import DarknessArrowRight from '~/icons/darkness-arrow-right.svg'
 import { sendFormData } from '~/services/forms'
 
@@ -16,6 +18,8 @@ interface Properties {
 }
 
 const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
   const FormSchema = Yup.object().shape({
     yourName: Yup.string().required(),
     yourCompany: Yup.string().required(),
@@ -65,9 +69,12 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
   })
 
   return (
-    <div className="contact-form bg-lightness">
+    <section ref={animationRef} className="contact-form bg-lightness">
       <Grid className="py-20 container px-4">
-        <div className="col-span-12 md:col-span-6 bg-default rounded-[32px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0">
+        <m.div
+          {...topDownShowAnimation()}
+          className="col-span-12 md:col-span-6 bg-default rounded-[32px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0"
+        >
           <h2
             className={classNames(
               'text-[32px] leading-[40px] md:text-[40px] md:leading-[48px] mb-6 md:mb-10 text-white'
@@ -218,8 +225,11 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
               )}
             </div>
           </form>
-        </div>
-        <div className="col-span-12 md:col-span-6 bg-white rounded-[16px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0">
+        </m.div>
+        <m.div
+          {...topDownShowAnimation(0.2)}
+          className="col-span-12 md:col-span-6 bg-white rounded-[16px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0"
+        >
           <h2
             className={classNames(
               'text-[32px] leading-[40px] md:text-[40px] md:leading-[48px] mb-6 md:mb-10 text-darkness'
@@ -278,9 +288,9 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
                 </li>
               ))}
           </ul>
-        </div>
+        </m.div>
       </Grid>
-    </div>
+    </section>
   )
 }
 

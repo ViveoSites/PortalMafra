@@ -30,18 +30,16 @@ const Header = () => {
 
   return (
     <header className="header fixed top-0 left-0 w-full z-50">
-      <div className="w-screen h-[120px] absolute top-0 left-0 bg-header"></div>
+      <div className="w-screen h-[120px] absolute top-0 left-0 bg-header" />
       <Grid className="py-4 px-10">
         <div className="col-span-12 md:col-span-2 z-20 relative text-center md:text-left mt-6 md:mt-0">
-          <h1>
-            <Link href="/">
-              <Mafra className="inline-block w-[104px] md:w-[131px]" />
-            </Link>
-          </h1>
+          <Link href="/">
+            <Mafra className="inline-block w-[104px] md:w-[131px]" />
+          </Link>
         </div>
 
         <div className="z-20 relative hidden md:flex col-span-8 col-start-3 items-center justify-center">
-          {menus.header?.length && (
+          {menus.header?.length > 0 && (
             <ul className="flex items-center space-x-2 bg-white h-[58px] rounded-[100px] overflow-hidden">
               {menus.header.map((item, index) => (
                 <li
@@ -78,7 +76,7 @@ const Header = () => {
               className={classNames('w-full h-[2px] bg-white transition-all', {
                 'rotate-45': mobileMenuOpen,
               })}
-            ></div>
+            />
             <div
               className={classNames(
                 'w-2/3 h-[2px] bg-white mt-1 ml-auto transition-all',
@@ -86,13 +84,13 @@ const Header = () => {
                   hidden: mobileMenuOpen,
                 }
               )}
-            ></div>
+            />
             <div
               className={classNames('h-[2px] bg-white transition-all', {
                 'w-1/2 mt-1 ml-auto': !mobileMenuOpen,
                 'rotate-[135deg] w-full -mt-[1px]': mobileMenuOpen,
               })}
-            ></div>
+            />
           </div>
         </div>
 
@@ -122,7 +120,7 @@ const Header = () => {
           )}
         </div>
 
-        <div className="col-span-2 col-start-10"></div>
+        <div className="col-span-2 col-start-10" />
       </Grid>
     </header>
   )
