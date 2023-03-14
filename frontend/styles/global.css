@@ -46,7 +46,7 @@ footer::before {
 .gradient-institucionalDark stop:first-of-type,
 .gradient-institucionalDark stop:first-of-type,
 .gradient-white stop:first-of-type {
-  stop-color: #73F7E8;
+  stop-color: #73f7e8;
 }
 
 .gradient-destaque stop::nth-child(2),
@@ -54,41 +54,41 @@ footer::before {
 .gradient-institucionalDark stop::nth-child(2),
 .gradient-institucionalDark stop::nth-child(2),
 .gradient-white stop::nth-child(2) {
-  stop-color: #D9EBFF;
+  stop-color: #d9ebff;
 }
 
 .gradient-greenDarkness stop:first-of-type,
 .gradient-green stop:first-of-type,
 .gradient-greenLight stop:first-of-type {
-  stop-color: #73F7E8;
+  stop-color: #73f7e8;
 }
 .gradient-greenDarkness stop:nth-child(2),
 .gradient-green stop:nth-child(2),
 .gradient-greenLight stop:nth-child(2) {
-  stop-color: #50E657;
+  stop-color: #50e657;
 }
 
 .gradient-purple stop:first-of-type {
-  stop-color: #73F7E8;
+  stop-color: #73f7e8;
 }
 .gradient-purple stop:nth-child(2) {
-  stop-color: #7E81DC;
+  stop-color: #7e81dc;
 }
 
 .gradient-accordion-button stop:first-of-type {
-  stop-color: #73F7E8;
+  stop-color: #73f7e8;
 }
 
 .gradient-accordion-button stop:nth-child(2) {
-  stop-color: #D9EBFF;
+  stop-color: #d9ebff;
 }
 
 .gradient-accordion-button-deselected stop:first-of-type {
-  stop-color: #20344B;
+  stop-color: #20344b;
 }
 
 .gradient-accordion-button-deselected stop:nth-child(2) {
-  stop-color: #20344B;
+  stop-color: #20344b;
 }
 
 .tag-greenDarkness,
@@ -105,23 +105,27 @@ footer::before {
   @apply bg-institucionalLight text-darkness;
 }
 
-.bg-header
-{
-  background: rgb(200,220,249);
-  background: linear-gradient(180deg, rgba(200,220,249,1) 0%, rgba(200,220,249,0.5) 50%, rgba(200,220,249,0) 80%);
+.bg-header {
+  background: rgb(200, 220, 249);
+  background: linear-gradient(
+    180deg,
+    rgba(200, 220, 249, 1) 0%,
+    rgba(200, 220, 249, 0.5) 50%,
+    rgba(200, 220, 249, 0) 80%
+  );
 }
 
-.gradient-border{
+.gradient-border {
   /* border-radius: 100px;
   border: 2px solid transparent;
   background: linear-gradient(45deg,red,blue) border-box;
   -webkit-mask:
-     linear-gradient(#f00 0 0) padding-box, 
+     linear-gradient(#f00 0 0) padding-box,
      linear-gradient(#f00 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude; */
 
-/* 
+  /*
   border-style: solid;
   border-width: 2px;
   border-image: linear-gradient(45deg, #73F7E8, #D9EBFF) 100px; */
