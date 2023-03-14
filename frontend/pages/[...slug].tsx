@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import PageLoading from '~/components/page-loading'
 import { GlobalState } from '~/contexts/global/types'
@@ -12,7 +12,7 @@ import { getPostData, getPostsData } from '~/services/posts'
 import { getPostTypeBySlug } from '~/utils/post-types'
 
 const DynamicPages = dynamic(() => import('~/layouts/dynamic-page'), {
-  suspense: true,
+  loading: () => <PageLoading />,
 })
 
 interface Properties {
@@ -49,15 +49,13 @@ const DynamicDeepPage: React.FC<Properties> = ({
   return (
     <>
       <Seo data={pageData?.seo} url={pageUrl} postType={pageData?.type} />
-      <Suspense fallback={<PageLoading />}>
-        <DynamicPages
-          globalData={globalData}
-          pageData={pageData}
-          posts={posts}
-          projects={projects}
-          postType={postType}
-        />
-      </Suspense>
+      <DynamicPages
+        globalData={globalData}
+        pageData={pageData}
+        posts={posts}
+        projects={projects}
+        postType={postType}
+      />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import PageLoading from '~/components/page-loading'
 import type { GlobalState } from '~/contexts/global/types'
@@ -14,7 +14,7 @@ interface HomeProperties {
 }
 
 const HomeLayout = dynamic(() => import('~/layouts/home'), {
-  suspense: true,
+  loading: () => <PageLoading />,
 })
 
 const HomePage: React.FC<HomeProperties> = ({
@@ -25,9 +25,7 @@ const HomePage: React.FC<HomeProperties> = ({
   return (
     <>
       <Seo data={pageData?.seo} url={pageUrl} postType={pageData?.type} />
-      <Suspense fallback={<PageLoading />}>
-        <HomeLayout globalData={globalData} pageData={pageData} />
-      </Suspense>
+      <HomeLayout globalData={globalData} pageData={pageData} />
     </>
   )
 }
