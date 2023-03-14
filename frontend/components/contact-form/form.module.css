@@ -3,7 +3,7 @@
 }
 
 .input {
-  @apply w-full h-12 px-4 placeholder:text-black text-black;
+  @apply w-full h-6 px-0 placeholder:text-black text-white;
   @apply border-b border-solid border-white bg-transparent outline-none;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .inputDefault {
-  @apply border-white h-[24px] px-0 text-white;
+  @apply border-white;
 }
 
 .inputError {
