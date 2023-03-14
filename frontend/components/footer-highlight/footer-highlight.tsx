@@ -6,6 +6,7 @@ import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
+// import SupplierModal from '~/components/supplier-modal'
 import useScrollAnimation from '~/helpers/use-scroll-animation'
 import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
 import GradientCircleBlMobile from '~/icons/gradientborder-circle-bl-mobile.svg'
@@ -18,18 +19,23 @@ interface Properties {
   contents: string
   button_label?: string
   button_link?: string
+  // button_type: string
+  // button_modal: string
+  button_link_target?: string
   featured_image: any
 }
 
-const Video: React.FC<Properties> = ({
+const FooterHighlight: React.FC<Properties> = ({
   colors,
   title,
   contents,
   button_label,
   button_link,
+  button_link_target,
   featured_image,
 }) => {
   const { animationRef, topDownShowAnimation } = useScrollAnimation()
+  // const [isModalOpen, setIsModalOpen] = useState(false)
 
   const coloredTitle = useMemo(
     () => title?.replace('<em>', `<em class="text-${colors?.featured_color}">`),
@@ -73,8 +79,22 @@ const Video: React.FC<Properties> = ({
                 buttonExtraClasses={`text-${colors.text_color} border-${colors.text_color} hover:!text-darkness hover:bg-white hover:border-white`}
                 label={button_label}
                 link={button_link}
-                target="_self"
+                target={button_link_target}
               />
+              {/* {button_type == 'modal' && (
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className={classNames(
+                    'py-5 px-8 hover:!text-darkness hover:bg-white hover:border-white rounded-[100px] leading-[22px] border-2 border-solid text-base text-darkness hover:border-2',
+                    {
+                      [`text-${colors.text_color}`]: colors.text_color,
+                      [`border-${colors.text_color}`]: colors.text_color,
+                    }
+                  )}
+                >
+                  {button_label}
+                </button>
+              )} */}
             </div>
           </div>
           <div
@@ -125,9 +145,14 @@ const Video: React.FC<Properties> = ({
             />
           </div>
         </Grid>
+        {/* <SupplierModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          formId="ID"
+        ></SupplierModal> */}
       </div>
     </m.div>
   )
 }
 
-export default Video
+export default FooterHighlight

@@ -6,7 +6,7 @@ import RichText from '~/components/rich-text'
 import useGlobal from '~/hooks/use-global'
 import ArrowRight from '~/icons/arrow-right.svg'
 import FutureBrand from '~/icons/futurebrand.svg'
-import Mafra from '~/icons/mafra.svg'
+import Mafra from '~/icons/mafra-light.svg'
 
 const Footer = () => {
   const {
@@ -25,7 +25,7 @@ const Footer = () => {
             <ul className="mt-10 md:mt-[100px]">
               {menus.footer.map((item, index) => (
                 <li className="mb-4 md:mb-1 flex" key={`footer-menu-${index}`}>
-                  <ArrowRight className="w-6 h-[25px] mr-2" />
+                  <ArrowRight className="w-6 h-[25px] mr-2 stroke-white" />
                   <Link href={item.url}>{item.title}</Link>
                 </li>
               ))}

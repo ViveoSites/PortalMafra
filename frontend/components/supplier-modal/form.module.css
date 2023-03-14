@@ -1,0 +1,51 @@
+.modalForm{
+  z-index: 1000;
+  height: 100vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.modalForm::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 992px)
+{
+  .modalForm{
+    height: calc(100vh - 100px);
+  }
+}
+
+.label {
+    @apply mb-1 text-darkness text-xl;
+  }
+  
+.input {
+  @apply w-full h-12 px-4 placeholder:text-black text-black;
+  @apply border-b border-solid border-white bg-transparent outline-none;
+}
+
+.inputTextarea {
+  @apply py-4 h-36 leading-5;
+}
+
+.inputDefault {
+  @apply border-darkness h-[24px] px-0 text-darkness;
+}
+
+.inputError {
+  @apply border-danger border-opacity-30 bg-opacity-10;
+}
+
+.btn {
+  @apply ml-auto h-[58px] px-8 py-[18px] text-base bg-darkness text-white flex items-center justify-center rounded-[100px] outline-none border-solid border-[1px] border-darkness hover:bg-white hover:border-darkness hover:text-darkness;
+}
+
+.btn:hover svg{
+  @apply stroke-darkness;
+}
+
+.btn[disabled] {
+  @apply cursor-default opacity-25;
+}
+  
