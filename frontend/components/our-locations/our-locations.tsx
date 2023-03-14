@@ -41,6 +41,7 @@ const OurLocations: React.FC<Properties> = ({
   const scrollToTopOfElement = (index) => {
     const elementTop =
       accordionReference.current.getBoundingClientRect().top + 50 * index - 100
+
     window.scrollTo({
       top: window.pageYOffset + elementTop,
       behavior: 'smooth',
@@ -48,7 +49,7 @@ const OurLocations: React.FC<Properties> = ({
   }
 
   return (
-    <div className="py-6 md:py-10 bg-neutralLight">
+    <div className="our-locations py-6 md:py-10 bg-neutralLight">
       <RichText
         htmlText={coloredTitle}
         className={classNames(

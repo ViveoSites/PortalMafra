@@ -12,7 +12,7 @@ interface Properties {
 
 const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
   return (
-    <div className="bg-institucionalLight py-10">
+    <div className="customer-care bg-institucionalLight py-10">
       <div className="container my-10 ">
         {topics_list &&
           topics_list.map((item, index) => {

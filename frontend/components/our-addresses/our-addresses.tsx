@@ -14,8 +14,9 @@ const OurAddresses: React.FC<Properties> = ({ title, addresses }) => {
     '<em>',
     `<em class="text-institucionalDark">`
   )
+
   return (
-    <div className="container my-10">
+    <div className="our-addresses container my-10">
       <Grid>
         <div className="col-span-12 mb-10 md:mb-20">
           <RichText

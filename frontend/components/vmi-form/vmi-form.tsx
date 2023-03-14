@@ -67,7 +67,7 @@ const ContactForm: React.FC<Properties> = ({ formId, title, description }) => {
   })
 
   return (
-    <div className="container">
+    <div className="vmi-form container">
       <Grid className="py-[60px] md:py-20 mt-10 mb-16 md:mb-[120px] px-4 md:px-10 bg-dark rounded-[32px]">
         <div className="col-span-12 md:col-span-5 text-white mb-10 md:mb-0">
           <RichText

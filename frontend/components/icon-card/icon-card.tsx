@@ -19,7 +19,8 @@ const IconCard: React.FC<Properties> = ({
 }) => {
   return (
     <li
-      className={`col-span-12 rounded-2xl mb-6 md:mb-10 flex flex-col items-start justify-start ${extraClasses}`}
+      className={`icon-card col-span-12 rounded-2xl mb-6 md:mb-10
+        flex flex-col items-start justify-start ${extraClasses}`}
     >
       <Image
         width="32"

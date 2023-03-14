@@ -15,7 +15,7 @@ const ProductCategories: React.FC<Properties> = ({
   columns_number,
 }) => {
   return (
-    <div className="container my-10">
+    <div className="product-categories container my-10">
       <ul className="grid grid-cols-12 gap-x-5 mt-12">
         {categories &&
           categories.map((item, index) => (

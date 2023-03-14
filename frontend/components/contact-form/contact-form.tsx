@@ -65,7 +65,7 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
   })
 
   return (
-    <div className="bg-lightness">
+    <div className="contact-form bg-lightness">
       <Grid className="py-20 container px-4">
         <div className="col-span-12 md:col-span-6 bg-default rounded-[32px] px-6 md:px-10 py-[60px] md:py-20 mb-10 md:mb-0">
           <h2
@@ -265,14 +265,14 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
                             dangerouslySetInnerHTML={{
                               __html: channel.subtitle,
                             }}
-                          ></div>
+                          />
                         )}
                         <div
                           className="text-base"
                           dangerouslySetInnerHTML={{
                             __html: channel.description,
                           }}
-                        ></div>
+                        />
                       </div>
                     ))}
                 </li>

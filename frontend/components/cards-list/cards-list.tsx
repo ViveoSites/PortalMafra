@@ -40,7 +40,7 @@ const CardsList: React.FC<Properties> = ({ cards_list }) => {
     sliderReference?.current?.slickNext()
   }
   return (
-    <div className="container my-10">
+    <div className="cards-list container my-10">
       <Grid className="md:hidden relative overflow-x-hidden pb-[90px]">
         <Slider
           {...settings}

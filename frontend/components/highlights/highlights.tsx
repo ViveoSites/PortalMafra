@@ -14,7 +14,7 @@ const Highlights: React.FC<Properties> = ({
   background,
 }) => {
   return (
-    <div className="h-screen bg-blue-300">
+    <div className="highlights h-screen bg-blue-300">
       Highlights - {title} {subtitle} {button} {background}{' '}
     </div>
   )

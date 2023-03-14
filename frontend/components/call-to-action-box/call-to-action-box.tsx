@@ -10,7 +10,7 @@ interface Properties {
 
 const CallToActionBox: React.FC<Properties> = ({ boxes }) => {
   return (
-    <Grid className="container my-8 gap-x-5">
+    <Grid className="call-to-action-box container my-8 gap-x-5">
       {boxes &&
         boxes.map((item, index) => (
           <div

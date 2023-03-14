@@ -26,7 +26,7 @@ const Card: React.FC<Properties> = ({
   return (
     <li
       className={classNames(
-        'overflow-hidden col-span-12 rounded-2xl mb-10 items-center justify-center',
+        'card overflow-hidden col-span-12 rounded-2xl mb-10 items-center justify-center',
         extraClasses
       )}
     >

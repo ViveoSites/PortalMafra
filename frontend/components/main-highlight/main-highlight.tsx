@@ -37,7 +37,7 @@ const MainHighlight: React.FC<Properties> = ({
   return (
     <div
       style={{ backgroundImage: `url(${background_image.url})` }}
-      className="bg-cover bg-[-110px] md:bg-center md:bg-100% bg-no-repeat h-screen"
+      className="main-highlight bg-cover bg-[-110px] md:bg-center md:bg-100% bg-no-repeat h-screen"
     >
       <Grid className="container bg-cover bg-no-repeat">
         <div

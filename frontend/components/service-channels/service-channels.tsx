@@ -5,7 +5,7 @@ interface Properties {
 }
 
 const ServiceChannels: React.FC<Properties> = () => {
-  return <p>Nossos Canais</p>
+  return <p className="service-channels">Nossos Canais</p>
 }
 
 export default ServiceChannels

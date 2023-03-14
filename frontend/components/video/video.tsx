@@ -34,7 +34,7 @@ const Video: React.FC<Properties> = ({
   }
 
   return (
-    <div className="container my-10 mb-20">
+    <div className="video container my-10 mb-20">
       <Grid>
         <div
           className={classNames(

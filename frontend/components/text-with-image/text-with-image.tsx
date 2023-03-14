@@ -29,7 +29,7 @@ const TextWithImage: React.FC<Properties> = ({
   button_link,
 }) => {
   return (
-    <div className="container my-10">
+    <div className="text-with-image container my-10">
       <Grid>
         <div
           className={classNames(

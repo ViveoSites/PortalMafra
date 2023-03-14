@@ -14,7 +14,7 @@ const GalleryWithCaptions: React.FC<Properties> = ({
   features_list,
 }) => {
   return (
-    <Grid className="my-10">
+    <Grid className="gallery-with-captions my-10">
       <div className="container col-span-12 px-0 md:px-4 md:rounded-[32px]">
         <Image
           width={featured_image.width}

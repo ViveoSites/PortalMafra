@@ -33,9 +33,12 @@ const Video: React.FC<Properties> = ({
   )
   return (
     <div
-      className={classNames('py-[72px] md:mt-[200px] rounded-t-[32px]', {
-        [`bg-${'darkness'}`]: 'darkness',
-      })}
+      className={classNames(
+        'footer-highlight py-[72px] md:mt-[200px] rounded-t-[32px]',
+        {
+          [`bg-${'darkness'}`]: 'darkness',
+        }
+      )}
     >
       <div className="container">
         <Grid>

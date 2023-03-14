@@ -5,7 +5,7 @@ interface Properties {
 }
 
 const OurBrands: React.FC<Properties> = () => {
-  return <p>Nossas Marcas</p>
+  return <p className="our-brands">Nossas Marcas</p>
 }
 
 export default OurBrands

@@ -5,7 +5,7 @@ import Grid from '~/components/grid'
 
 const Newsletter = () => {
   return (
-    <Grid className="container py-20 bg-black bg-opacity-80 text-white">
+    <Grid className="newsletter container py-20 bg-black bg-opacity-80 text-white">
       <div className="col-span-12 lg:col-span-10 lg:col-start-2">
         <h3 className="heading-sm mb-10">
           Olá, eu sou uma newsletter.

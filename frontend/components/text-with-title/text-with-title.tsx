@@ -15,8 +15,9 @@ const TextWithTitle: React.FC<Properties> = ({ title, contents, colors }) => {
     '<em>',
     `<em class="text-${colors.featured_color}">`
   )
+
   return (
-    <div className="container my-10">
+    <div className="text-with-title container my-10">
       <Grid>
         <div className={classNames('col-span-12 md:col-span-5')}>
           <RichText

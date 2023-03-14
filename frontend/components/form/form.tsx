@@ -51,7 +51,7 @@ const Form = ({ formId }) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="relative grid grid-cols-2 gap-4 max-w-[700px]"
+      className="form relative grid grid-cols-2 gap-4 max-w-[700px]"
       noValidate
     >
       <div className="mb-4 col-span-2 md:col-span-1">

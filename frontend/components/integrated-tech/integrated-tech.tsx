@@ -20,8 +20,8 @@ const IntegratedTech: React.FC<Properties> = ({
   topics_list,
 }) => {
   return (
-    <div>
-      <div className="">
+    <div className="integrated-tech">
+      <div>
         <Image
           width="1200"
           height="680"
