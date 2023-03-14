@@ -15,9 +15,11 @@ interface Properties {
   colors: any
   tagline: string
   contents: string
+  text_align: string
   highlight_image: any
   image_format: string
   background_image?: any
+  mobile_background_image?: any
 }
 
 const InternalHighlight: React.FC<Properties> = ({
@@ -25,38 +27,64 @@ const InternalHighlight: React.FC<Properties> = ({
   title,
   colors,
   contents,
+  text_align,
   highlight_image,
   image_format,
   background_image,
+  mobile_background_image,
 }) => {
   const coloredTitle = title.replace(
     '<em>',
     `<em class="text-${colors.featured_color}">`
   )
-
   return (
     <div
-      style={{ backgroundImage: `url(${background_image.url})` }}
       className={classNames(
-        'bg-[-130px_center] md:bg-center min-h-screen bg-no-repeat',
+        'bg-[-130px_center] md:bg-center min-h-screen relative',
         {
           'md:bg-[length:100%_100%]': highlight_image,
           'md:bg-cover': !highlight_image,
         }
       )}
     >
-      <Grid className="container bg-cover bg-no-repeat pt-[160px] pb-[48px] md:pt-[120px] md:pb-[72px] h-screen">
+      <Image
+        width={background_image.width}
+        height={background_image.height}
+        className={classNames(
+          'absolute object-cover object-center z-10 left-0 top-0 w-full h-full md:block',
+          {
+            hidden: mobile_background_image,
+          }
+        )}
+        alt={title}
+        src={background_image.url}
+      />
+      {mobile_background_image && (
+        <Image
+          width={mobile_background_image.width}
+          height={mobile_background_image.height}
+          className={classNames(
+            'absolute object-cover object-center z-10 left-0 top-0 w-full h-full md:hidden'
+          )}
+          alt={title}
+          src={mobile_background_image.url}
+        />
+      )}
+      <Grid className="z-20 relative container bg-cover bg-no-repeat pt-[160px] pb-[48px] md:pt-[120px] md:pb-[72px] h-screen">
         <div
           className={classNames(
-            'col-span-12 md:col-span-5 text-black justify-center flex flex-col'
+            'col-span-12 md:col-span-5 text-black flex flex-col',
+            {
+              'justify-center': text_align == 'center',
+            }
           )}
         >
           {tagline_highlight && (
             <div
               className={classNames(
-                'w-fit py-[10px] px-4 bg-institucionalLight rounded-[100px] mb-4',
+                'w-fit py-[10px] px-4 rounded-[100px] mb-4',
                 {
-                  [`text-darkness`]: 'darkness',
+                  [`tag-${colors.featured_color}`]: colors.featured_color,
                 }
               )}
             >
@@ -93,7 +121,7 @@ const InternalHighlight: React.FC<Properties> = ({
               <>
                 <GradientSquareTopLeft
                   className={classNames(
-                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden md:block',
+                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden 1.5xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -102,7 +130,7 @@ const InternalHighlight: React.FC<Properties> = ({
                 />
                 <GradientSquareRight
                   className={classNames(
-                    'absolute -right-2 bottom-12 pointer-events-none z-10 hidden md:block',
+                    'absolute -right-2 bottom-12 pointer-events-none z-10 hidden 1.5xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -115,7 +143,7 @@ const InternalHighlight: React.FC<Properties> = ({
               <>
                 <GradientCircleTopRight
                   className={classNames(
-                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden md:block',
+                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden 1.5xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -124,7 +152,7 @@ const InternalHighlight: React.FC<Properties> = ({
                 />
                 <GradientCircleBl
                   className={classNames(
-                    'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden md:block',
+                    'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden 1.5xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -139,7 +167,7 @@ const InternalHighlight: React.FC<Properties> = ({
                 width={highlight_image.width}
                 height={highlight_image.height}
                 className={classNames(
-                  'w-full h-[370px] md:h-[640px] object-cover object-center',
+                  'w-full h-[370px] md:h-[450px] 1.5xl:h-[600px] object-cover object-center',
                   {
                     'rounded-[32px]': image_format == 'square',
                     'rounded-[1000px]': image_format == 'circle',

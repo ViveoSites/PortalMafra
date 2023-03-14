@@ -65,7 +65,7 @@ const Documents: React.FC<Properties> = ({ title, description, documents }) => {
                         item['shop-documents'].map(
                           (itemDocument, indexDocument) => (
                             <li
-                              className="flex mb-8 items-center"
+                              className="flex flex-wrap md:flex-nowrap mb-8 items-center"
                               key={`item-${indexDocument}`}
                             >
                               <span className="text-xl pr-3">
@@ -74,7 +74,7 @@ const Documents: React.FC<Properties> = ({ title, description, documents }) => {
                               <Link
                                 isExternal={true}
                                 href={itemDocument['document-file']}
-                                className="bg-darkness text-white h-[58px] px-8 text-base rounded-[100px] flex items-center"
+                                className="bg-darkness text-white h-[58px] px-8 text-base rounded-[100px] flex items-center md:ml-auto mt-4 md:mt-0"
                               >
                                 Download
                                 <Download className="ml-2" />

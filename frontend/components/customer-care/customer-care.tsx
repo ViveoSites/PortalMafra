@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
+import ArrowRight from '~/icons/arrow-right.svg'
 
 interface Properties {
   topics_list: any
@@ -22,12 +22,12 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
             )
             return (
               <Grid
-                className={classNames('col-span-12 mb-10')}
+                className={classNames('col-span-12 mb-4 md:mb-10')}
                 key={`item-${index}`}
               >
                 <div
                   className={classNames(
-                    'flex items-center justify-center col-span-12 md:col-span-5',
+                    'flex items-center md:justify-center col-span-12 md:col-span-5 mb-6 md:mb-0',
                     {
                       'md:justify-start md:col-start-2': index % 2 == 0,
                       'md:justify-end md:col-start-7 md:order-1':
@@ -38,17 +38,19 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
                   <Image
                     width={item.featured_image.width}
                     height={item.featured_image.height}
-                    className={classNames('object-cover object-center', {
-                      'max-w-[300px]': index % 2 == 0,
-                      'ml-auto': index % 2 != 0,
-                    })}
+                    className={classNames(
+                      'object-contain object-center max-w-[300px] min-h-[200px]',
+                      {
+                        'md:ml-auto': index % 2 != 0,
+                      }
+                    )}
                     alt={item.topic_title.replace(/<\/?[^>]+(>|$)/g, '')}
                     src={item.featured_image.url}
                   />
                 </div>
                 <div
                   className={classNames(
-                    'col-span-12 md:col-span-5 mb-14 md:mb-0 flex-col justify-center',
+                    'col-span-12 md:col-span-5 mb-6 md:mb-0 flex-col justify-center',
                     {
                       'md:col-start-2': index % 2 != 0,
                       'md:col-start-7 md:order-1': index % 2 == 0,
@@ -68,12 +70,16 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
                     )}
                   />
                   {item.button_label && (
-                    <Button
-                      extraClasses="justify-start"
-                      label={item.button_label}
-                      link={item.button_link}
+                    <a
+                      href={item.button_link}
                       target={item.button_target}
-                    />
+                      className={classNames(
+                        'py-5 px-8 rounded-[100px] text-base leading-[22px] border-2 border-solid text-white border-darkness bg-darkness  hover:bg-white hover:text-darkness hover:border-2 hover:border-darkness flex items-center justify-center w-fit stroke-white hover:stroke-darkness'
+                      )}
+                    >
+                      {item.button_label}
+                      <ArrowRight className="w-6 h-[25px] ml-2" />
+                    </a>
                   )}
                 </div>
               </Grid>

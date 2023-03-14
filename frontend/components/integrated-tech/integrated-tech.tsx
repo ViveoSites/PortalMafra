@@ -33,7 +33,7 @@ const IntegratedTech: React.FC<Properties> = ({
       <div className="container px-0 my-10 relative -mt-[80px] md:-mt-[320px]">
         <Grid
           className={classNames(
-            'pt-10 pb-10 md:pt-20 md:pb-40 rounded-t-[32px] md:rounded-[32px]',
+            'pt-10 pb-10 md:pt-20 md:pb-20 rounded-t-[32px] md:rounded-[32px]',
             {
               [`text-${colors.text_color}`]: colors.text_color,
               [`bg-${colors.featured_color}`]: colors.featured_color,
