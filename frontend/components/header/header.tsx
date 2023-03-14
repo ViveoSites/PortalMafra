@@ -30,8 +30,9 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
+      <div className="w-screen h-[120px] absolute top-0 left-0 bg-header"></div>
       <Grid className="py-4 px-10">
-        <div className="col-span-12 md:col-span-2 z-10 relative text-center md:text-left mt-6 md:mt-0">
+        <div className="col-span-12 md:col-span-2 z-20 relative text-center md:text-left mt-6 md:mt-0">
           <h1>
             <Link href="/">
               <Mafra className="inline-block w-[104px] md:w-[131px]" />
@@ -39,7 +40,7 @@ const Header = () => {
           </h1>
         </div>
 
-        <div className="hidden md:flex col-span-8 col-start-3 items-center justify-center">
+        <div className="z-20 relative hidden md:flex col-span-8 col-start-3 items-center justify-center">
           {menus.header?.length && (
             <ul className="flex items-center space-x-2 bg-white h-[58px] rounded-[100px] overflow-hidden">
               {menus.header.map((item, index) => (

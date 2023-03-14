@@ -42,14 +42,14 @@ const MainHighlight: React.FC<Properties> = ({
       <Grid className="container bg-cover bg-no-repeat">
         <div
           className={classNames(
-            'py-[160px] md:py-[230px] col-span-12 md:col-span-8 md:col-start-3 w-full flex flex-col items-center justify-center text-center text-white'
+            'py-[160px] md:py-[230px] col-span-12 md:col-span-8 md:col-start-3 1.5xl:col-span-10 1.5xl:col-start-2 w-full flex flex-col items-center justify-center text-center text-white'
           )}
         >
           <div className={classNames('text-xl mb-6')}>{tagline}</div>
           <RichText
             htmlText={coloredTitle}
             className={classNames(
-              'text-5xl leading-[54px] md:text-[100px] md:leading-[108px] mb-6',
+              'text-5xl leading-[54px] md:text-[64px] md:leading-[72px] 1.5xl:text-[90px] 1.5xl:leading-[98px] mb-6',
               {
                 [`text-${colors.text_color}`]: colors.text_color,
               }

@@ -1,9 +1,13 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
+import ArrowRight from '~/icons/arrow-right.svg'
+import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
+import GradientCircleTopRight from '~/icons/gradientborder-circle-tr.svg'
+import GradientSquareRight from '~/icons/gradientborder-square-r.svg'
+import GradientSquareTopLeft from '~/icons/gradientborder-square-tl.svg'
 
 interface Properties {
   title: string
@@ -49,20 +53,53 @@ const TextWithImage: React.FC<Properties> = ({
             className={classNames('text-base md:text-2xl mb-6')}
           ></div>
           {button_label && (
-            <Button
-              extraClasses="justify-start mb-10 md:mb-0"
-              label={button_label}
-              link={button_link}
+            <a
+              href={button_link}
               target="_blank"
-            />
+              className={classNames(
+                'py-5 px-8 rounded-[100px] text-base leading-[22px] border-2 border-solid text-white border-darkness bg-darkness  hover:bg-white hover:text-darkness hover:border-2 hover:border-darkness flex items-center justify-center w-fit stroke-white hover:stroke-darkness'
+              )}
+              rel="noreferrer"
+            >
+              {button_label}
+              <ArrowRight className="w-6 h-[25px] ml-2" />
+            </a>
           )}
         </div>
         <div
-          className={classNames('col-span-12 mb-6', {
+          className={classNames('col-span-12 mb-6 relative', {
             'md:col-start-8 order-2 md:col-span-5': image_position == 'right',
             'md:col-span-5': image_position == 'left',
           })}
         >
+          {featured_image && image_format === 'squared' && (
+            <>
+              <GradientSquareTopLeft
+                className={classNames(
+                  'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden md:block'
+                )}
+              />
+              <GradientSquareRight
+                className={classNames(
+                  'absolute -right-2 bottom-12 pointer-events-none z-10 hidden md:block'
+                )}
+              />
+            </>
+          )}
+          {featured_image && image_format === 'rounded' && (
+            <>
+              <GradientCircleTopRight
+                className={classNames(
+                  'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden md:block'
+                )}
+              />
+              <GradientCircleBl
+                className={classNames(
+                  'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden md:block'
+                )}
+              />
+            </>
+          )}
           <Image
             width={featured_image.width}
             height={featured_image.height}

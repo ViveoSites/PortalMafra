@@ -260,11 +260,19 @@ const ContactForm: React.FC<Properties> = ({ formId, title, list }) => {
                         key={`channel-${newIndex}`}
                       >
                         {channel.subtitle && (
-                          <div className="text-xl mb-4 min-h-[50px]">
-                            {channel.subtitle}
-                          </div>
+                          <div
+                            className="text-xl mb-4 min-h-[50px]"
+                            dangerouslySetInnerHTML={{
+                              __html: channel.subtitle,
+                            }}
+                          ></div>
                         )}
-                        <div className="text-base">{channel.description}</div>
+                        <div
+                          className="text-base"
+                          dangerouslySetInnerHTML={{
+                            __html: channel.description,
+                          }}
+                        ></div>
                       </div>
                     ))}
                 </li>

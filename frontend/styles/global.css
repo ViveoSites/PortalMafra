@@ -90,3 +90,39 @@ footer::before {
 .gradient-accordion-button-deselected stop:nth-child(2) {
   stop-color: #20344B;
 }
+
+.tag-greenDarkness,
+.tag-green,
+.tag-greenLight {
+  @apply bg-greenLight text-greenDarkness;
+}
+
+.tag-destaque,
+.tag-institucionalLight,
+.tag-institucionalDark,
+.tag-institucionalDark,
+.tag-white {
+  @apply bg-institucionalLight text-darkness;
+}
+
+.bg-header
+{
+  background: rgb(200,220,249);
+  background: linear-gradient(180deg, rgba(200,220,249,1) 0%, rgba(200,220,249,0.5) 50%, rgba(200,220,249,0) 80%);
+}
+
+.gradient-border{
+  /* border-radius: 100px;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg,red,blue) border-box;
+  -webkit-mask:
+     linear-gradient(#f00 0 0) padding-box, 
+     linear-gradient(#f00 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; */
+
+/* 
+  border-style: solid;
+  border-width: 2px;
+  border-image: linear-gradient(45deg, #73F7E8, #D9EBFF) 100px; */
+}
