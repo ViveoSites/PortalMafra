@@ -1,8 +1,10 @@
 import classNames from 'classnames'
-import React from 'react'
+import { m } from 'framer-motion'
+import React, { useMemo } from 'react'
 
 import Grid from '~/components/grid'
 import RichText from '~/components/rich-text'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 
 interface Properties {
   title: string
@@ -10,28 +12,35 @@ interface Properties {
 }
 
 const OurAddresses: React.FC<Properties> = ({ title, addresses }) => {
-  const coloredTitle = title.replace(
-    '<em>',
-    `<em class="text-institucionalDark">`
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
+  const coloredTitle = useMemo(
+    () => title?.replace('<em>', `<em class="text-institucionalDark">`),
+    [title]
   )
+
   return (
-    <div className="container my-10">
+    <section ref={animationRef} className="our-addresses container my-10">
       <Grid>
-        <div className="col-span-12 mb-10 md:mb-20">
+        <m.div
+          {...topDownShowAnimation()}
+          className="col-span-12 mb-10 md:mb-20"
+        >
           <RichText
             htmlText={coloredTitle}
             className={classNames(
               'lg:grid-cols-1 text-[32px] text-darkness md:text-[40px] leading-[40px] md:leading-[48px]'
             )}
           />
-        </div>
+        </m.div>
       </Grid>
       <ul className="grid grid-cols-6 md:grid-cols-12 md:gap-x-20">
         {addresses &&
           addresses.map((item, index) => (
-            <li
+            <m.li
+              key={`address-${index}`}
               className={classNames('col-span-12 md:col-span-4 mb-6 md:mb-16')}
-              key={`item-${index}`}
+              {...topDownShowAnimation(index * 0.1)}
             >
               <div
                 className={classNames(
@@ -43,10 +52,10 @@ const OurAddresses: React.FC<Properties> = ({ title, addresses }) => {
               <div className={classNames('text-base md:text-xl text-black')}>
                 {item.description}
               </div>
-            </li>
+            </m.li>
           ))}
       </ul>
-    </div>
+    </section>
   )
 }
 

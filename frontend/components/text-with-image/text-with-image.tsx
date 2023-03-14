@@ -1,8 +1,11 @@
 import classNames from 'classnames'
+import { m } from 'framer-motion'
 import React from 'react'
 
 import Grid from '~/components/grid'
 import Image from '~/components/image'
+import Link from '~/components/link'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 import ArrowRight from '~/icons/arrow-right.svg'
 import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
 import GradientCircleTopRight from '~/icons/gradientborder-circle-tr.svg'
@@ -28,10 +31,13 @@ const TextWithImage: React.FC<Properties> = ({
   button_label,
   button_link,
 }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
   return (
-    <div className="container my-10">
+    <section ref={animationRef} className="text-with-image container my-10">
       <Grid>
-        <div
+        <m.div
+          {...topDownShowAnimation()}
           className={classNames(
             'text-darkness flex flex-col justify-center col-span-12 mb-6',
             {
@@ -51,11 +57,10 @@ const TextWithImage: React.FC<Properties> = ({
           <div
             dangerouslySetInnerHTML={{ __html: description }}
             className={classNames('text-base md:text-2xl mb-6')}
-          ></div>
+          />
           {button_label && (
-            <a
+            <Link
               href={button_link}
-              target="_blank"
               className={classNames(
                 'py-5 px-8 rounded-[100px] text-base leading-[22px] border-2 border-solid text-white border-darkness bg-darkness  hover:bg-white hover:text-darkness hover:border-2 hover:border-darkness flex items-center justify-center w-fit stroke-white hover:stroke-darkness'
               )}
@@ -63,10 +68,11 @@ const TextWithImage: React.FC<Properties> = ({
             >
               {button_label}
               <ArrowRight className="w-6 h-[25px] ml-2" />
-            </a>
+            </Link>
           )}
-        </div>
-        <div
+        </m.div>
+        <m.div
+          {...topDownShowAnimation(0.2)}
           className={classNames('col-span-12 mb-6 relative', {
             'md:col-start-8 order-2 md:col-span-5': image_position == 'right',
             'md:col-span-5': image_position == 'left',
@@ -101,8 +107,7 @@ const TextWithImage: React.FC<Properties> = ({
             </>
           )}
           <Image
-            width={featured_image.width}
-            height={featured_image.height}
+            {...featured_image}
             className={classNames('w-full object-cover object-center', {
               'h-[425px] md:h-[620px] rounded-[32px]':
                 image_format == 'rectangle',
@@ -110,12 +115,10 @@ const TextWithImage: React.FC<Properties> = ({
               'h-[250px] md:h-[380px] rounded-[500px]':
                 image_format == 'rounded',
             })}
-            alt={title}
-            src={featured_image.url}
           />
-        </div>
+        </m.div>
       </Grid>
-    </div>
+    </section>
   )
 }
 

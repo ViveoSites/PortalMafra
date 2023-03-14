@@ -20,7 +20,7 @@ const CallToActionBanner: React.FC<Properties> = ({
   return (
     <div
       style={{ backgroundImage: `url(${background_image.url})` }}
-      className="bg-100% bg-no-repeat py-[132px]"
+      className="call-to-action-banner bg-100% bg-no-repeat py-[132px]"
     >
       <div className="container flex items-center justify-center flex-col">
         <h2

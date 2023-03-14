@@ -1,9 +1,11 @@
 import classNames from 'classnames'
+import { m } from 'framer-motion'
 import React from 'react'
 
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 import ArrowRight from '~/icons/arrow-right.svg'
 
 interface Properties {
@@ -11,9 +13,14 @@ interface Properties {
 }
 
 const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
   return (
-    <div className="bg-institucionalLight py-10">
-      <div className="container my-10 ">
+    <section
+      ref={animationRef}
+      className="customer-care bg-institucionalLight py-10"
+    >
+      <m.div {...topDownShowAnimation()} className="container my-10 ">
         {topics_list &&
           topics_list.map((item, index) => {
             const coloredTitle = item.topic_title.replace(
@@ -85,8 +92,8 @@ const CustomerCare: React.FC<Properties> = ({ topics_list }) => {
               </Grid>
             )
           })}
-      </div>
-    </div>
+      </m.div>
+    </section>
   )
 }
 

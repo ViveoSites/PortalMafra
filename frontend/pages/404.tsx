@@ -1,10 +1,15 @@
+import dynamic from 'next/dynamic'
 import { NextSeo } from 'next-seo'
 
-import Layout from '~/layouts/default'
+import PageLoading from '~/components/page-loading'
+
+const LayoutDefault = dynamic(() => import('~/layouts/default'), {
+  loading: () => <PageLoading />,
+})
 
 const NotFoundPage = ({ message }) => {
   return (
-    <Layout>
+    <LayoutDefault>
       <NextSeo title="Página não encontrada" />
 
       <div className="container py-9 md:py-20">
@@ -28,7 +33,7 @@ const NotFoundPage = ({ message }) => {
           </p>
         </div>
       </div>
-    </Layout>
+    </LayoutDefault>
   )
 }
 

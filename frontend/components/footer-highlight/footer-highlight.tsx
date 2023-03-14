@@ -1,10 +1,12 @@
 import classNames from 'classnames'
-import React from 'react'
+import { m } from 'framer-motion'
+import React, { useMemo } from 'react'
 
 import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
 import GradientCircleBlMobile from '~/icons/gradientborder-circle-bl-mobile.svg'
 import GradientCircleTopRight from '~/icons/gradientborder-circle-tr.svg'
@@ -27,15 +29,23 @@ const Video: React.FC<Properties> = ({
   button_link,
   featured_image,
 }) => {
-  const coloredTitle = title.replace(
-    '<em>',
-    `<em class="text-${colors.featured_color}">`
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
+  const coloredTitle = useMemo(
+    () => title?.replace('<em>', `<em class="text-${colors?.featured_color}">`),
+    [title, colors]
   )
+
   return (
-    <div
-      className={classNames('py-[72px] md:mt-[200px] rounded-t-[32px]', {
-        [`bg-${'darkness'}`]: 'darkness',
-      })}
+    <m.div
+      {...topDownShowAnimation()}
+      ref={animationRef}
+      className={classNames(
+        'footer-highlight py-[72px] md:mt-[200px] rounded-t-[32px]',
+        {
+          [`bg-${'darkness'}`]: 'darkness',
+        }
+      )}
     >
       <div className="container">
         <Grid>
@@ -116,7 +126,7 @@ const Video: React.FC<Properties> = ({
           </div>
         </Grid>
       </div>
-    </div>
+    </m.div>
   )
 }
 

@@ -1,7 +1,9 @@
 import classNames from 'classnames'
+import { m } from 'framer-motion'
 import React from 'react'
 
 import Image from '~/components/image'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 
 interface Properties {
   title: string
@@ -14,20 +16,23 @@ const ProductCategories: React.FC<Properties> = ({
   categories,
   columns_number,
 }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
+
   return (
-    <div className="container my-10">
+    <div ref={animationRef} className="product-categories container my-10">
       <ul className="grid grid-cols-12 gap-x-5 mt-12">
         {categories &&
           categories.map((item, index) => (
-            <li
-              style={{ backgroundColor: `${item.acf.background_color}` }}
+            <m.li
+              key={`product-category-${index}`}
+              {...topDownShowAnimation(index * 0.2)}
+              style={{ backgroundColor: `${item.acf?.background_color}` }}
               className={classNames(
                 'overflow-hidden col-span-12 text-darkness rounded-2xl mb-10 items-center justify-center',
                 {
                   [`md:col-span-${12 / columns_number}`]: columns_number,
                 }
               )}
-              key={`icon-card-${index}`}
             >
               <Image
                 width={item.acf?.image.width}
@@ -56,7 +61,7 @@ const ProductCategories: React.FC<Properties> = ({
                   />
                 )} */}
               </div>
-            </li>
+            </m.li>
           ))}
       </ul>
     </div>

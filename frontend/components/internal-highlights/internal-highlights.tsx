@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Grid from '~/components/grid'
 import Image from '~/components/image'
@@ -33,14 +33,15 @@ const InternalHighlight: React.FC<Properties> = ({
   background_image,
   mobile_background_image,
 }) => {
-  const coloredTitle = title.replace(
-    '<em>',
-    `<em class="text-${colors.featured_color}">`
+  const coloredTitle = useMemo(
+    () => title?.replace('<em>', `<em class="text-${colors?.featured_color}">`),
+    [title, colors]
   )
+
   return (
-    <div
+    <section
       className={classNames(
-        'bg-[-130px_center] md:bg-center min-h-screen relative',
+        'internal-highlights bg-[-130px_center] md:bg-center min-h-screen relative',
         {
           'md:bg-[length:100%_100%]': highlight_image,
           'md:bg-cover': !highlight_image,
@@ -48,26 +49,20 @@ const InternalHighlight: React.FC<Properties> = ({
       )}
     >
       <Image
-        width={background_image.width}
-        height={background_image.height}
+        {...background_image}
         className={classNames(
           'absolute object-cover object-center z-10 left-0 top-0 w-full h-full md:block',
           {
-            hidden: mobile_background_image,
+            hidden: !!mobile_background_image,
           }
         )}
-        alt={title}
-        src={background_image.url}
       />
       {mobile_background_image && (
         <Image
-          width={mobile_background_image.width}
-          height={mobile_background_image.height}
+          {...mobile_background_image}
           className={classNames(
             'absolute object-cover object-center z-10 left-0 top-0 w-full h-full md:hidden'
           )}
-          alt={title}
-          src={mobile_background_image.url}
         />
       )}
       <Grid className="z-20 relative container bg-cover bg-no-repeat pt-[160px] pb-[48px] md:pt-[120px] md:pb-[72px] h-screen">
@@ -164,8 +159,7 @@ const InternalHighlight: React.FC<Properties> = ({
 
             {highlight_image && (
               <Image
-                width={highlight_image.width}
-                height={highlight_image.height}
+                {...highlight_image}
                 className={classNames(
                   'w-full h-[370px] md:h-[450px] 1.5xl:h-[600px] object-cover object-center',
                   {
@@ -173,14 +167,12 @@ const InternalHighlight: React.FC<Properties> = ({
                     'rounded-[1000px]': image_format == 'circle',
                   }
                 )}
-                alt={title}
-                src={highlight_image.url}
               />
             )}
           </div>
         </div>
       </Grid>
-    </div>
+    </section>
   )
 }
 

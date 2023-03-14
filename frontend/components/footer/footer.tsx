@@ -14,7 +14,7 @@ const Footer = () => {
   } = useGlobal()
 
   return (
-    <footer className="bg-dark text-white relative">
+    <footer className="footer bg-dark text-white relative">
       <Grid className="py-7 container px-8 md:px-4">
         <div className="col-span-12 lg:col-span-5 lg:col-start-1">
           <Link href="/">

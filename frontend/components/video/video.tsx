@@ -1,9 +1,11 @@
 import classNames from 'classnames'
+import { m } from 'framer-motion'
 import React, { useState } from 'react'
 
 import Button from '~/components/button'
 import Grid from '~/components/grid'
 import Image from '~/components/image'
+import useScrollAnimation from '~/helpers/use-scroll-animation'
 import ButtonPlay from '~/icons/btn-play.svg'
 import GradientBorderBl32 from '~/icons/gradientborder-bl-32.svg'
 import GradientBorderBl32Mobile from '~/icons/gradientborder-bl-32-mobile.svg'
@@ -27,6 +29,7 @@ const Video: React.FC<Properties> = ({
   button_link,
   button_target,
 }) => {
+  const { animationRef, topDownShowAnimation } = useScrollAnimation()
   const [videoPlaying, setVideoPlaying] = useState(false)
 
   const playVideo = () => {
@@ -34,14 +37,17 @@ const Video: React.FC<Properties> = ({
   }
 
   return (
-    <div className="container my-10 mb-20">
+    <div ref={animationRef} className="video container my-10 mb-20">
       <Grid>
         <div
           className={classNames(
             'col-span-12 md:col-span-8 md:col-start-3 rounded-[32px] relative'
           )}
         >
-          <div className="w-full h-[360px] md:h-[580px] mb-7 md:mb-10 rounded-[32px] relative">
+          <m.div
+            {...topDownShowAnimation()}
+            className="w-full h-[360px] md:h-[580px] mb-7 md:mb-10 rounded-[32px] relative"
+          >
             <GradientBorderTop
               className={classNames(
                 'absolute left-[40px] -top-2 pointer-events-none z-10 object-contain h-4 hidden md:block',
@@ -104,14 +110,16 @@ const Video: React.FC<Properties> = ({
               src={`https://www.youtube.com/embed/${video}`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-            ></iframe>
-          </div>
-          <Button
-            extraClasses="justify-center"
-            label={button_label}
-            link={button_link}
-            target={button_target}
-          />
+            />
+          </m.div>
+          <m.div {...topDownShowAnimation(0.2)}>
+            <Button
+              extraClasses="justify-center"
+              label={button_label}
+              link={button_link}
+              target={button_target}
+            />
+          </m.div>
         </div>
       </Grid>
     </div>

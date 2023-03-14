@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import Link from '~/components/link'
+
 interface Properties {
   label: string
   link: string
@@ -18,7 +20,7 @@ const Button: React.FC<Properties> = ({
 }) => {
   return (
     <div className={classNames('flex w-full', extraClasses)}>
-      <a
+      <Link
         href={link}
         target={target}
         className={classNames(
@@ -27,7 +29,7 @@ const Button: React.FC<Properties> = ({
         )}
       >
         {label}
-      </a>
+      </Link>
     </div>
   )
 }

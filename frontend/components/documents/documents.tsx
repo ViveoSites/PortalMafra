@@ -26,7 +26,7 @@ const Documents: React.FC<Properties> = ({ title, description, documents }) => {
   }
 
   return (
-    <div className="bg-institucionalLight py-20">
+    <div className="documents bg-institucionalLight py-20">
       <Grid className="container">
         <div className="md:col-span-5">
           <h2 className="text-5xl">{title}</h2>
