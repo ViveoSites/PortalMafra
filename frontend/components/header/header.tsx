@@ -43,16 +43,19 @@ const Header = () => {
             <ul className="flex items-center space-x-2 bg-white h-[58px] rounded-[100px] overflow-hidden">
               {menus.header.map((item, index) => (
                 <li
-                  onClick={() => closeMenu()}
-                  className={classNames(
-                    'px-8 h-full flex items-center rounded-[100px] hover:bg-institucionalLight',
-                    {
-                      '!bg-destaque': router.asPath === item.url,
-                    }
-                  )}
                   key={`header-menu-${index}`}
+                  className="h-full flex items-center"
                 >
-                  <Link className="h-full flex items-center" href={item.url}>
+                  <Link
+                    className={classNames(
+                      'h-full flex items-center px-8 rounded-[100px] hover:bg-institucionalLight',
+                      {
+                        '!bg-destaque': router.asPath === item.url,
+                      }
+                    )}
+                    href={item.url}
+                    onClick={() => closeMenu()}
+                  >
                     {item.title}
                   </Link>
                 </li>
@@ -106,14 +109,16 @@ const Header = () => {
           {menus.header?.length && (
             <ul className="flex flex-col space-y-10 mt-[200px] px-8">
               {menus.header.map((item, index) => (
-                <li
-                  onClick={() => closeMenu()}
-                  className={classNames('text-5xl', {
-                    'italic text-destaque': router.asPath === item.url,
-                  })}
-                  key={`header-menu-${index}`}
-                >
-                  <Link href={item.url}>{item.title}</Link>
+                <li key={`header-menu-${index}`} className="text-5xl">
+                  <Link
+                    href={item.url}
+                    onClick={() => closeMenu()}
+                    className={classNames({
+                      'italic text-destaque': router.asPath === item.url,
+                    })}
+                  >
+                    {item.title}
+                  </Link>
                 </li>
               ))}
             </ul>
