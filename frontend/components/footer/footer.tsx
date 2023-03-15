@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Grid from '~/components/grid'
 import Link from '~/components/link'
@@ -13,6 +13,9 @@ const Footer = () => {
     state: { menus, options },
   } = useGlobal()
 
+  const headerMenu = useMemo(() => menus?.['header-menu'], [menus])
+  const footerMenu = useMemo(() => menus?.footer, [menus])
+
   return (
     <footer className="footer bg-dark text-white relative">
       <Grid className="py-7 container px-8 md:px-4">
@@ -21,9 +24,9 @@ const Footer = () => {
             <Mafra className="w-[130px]" />
           </Link>
           <p className="mt-6 text-[14px]">{options.footer_description}</p>
-          {menus.footer?.length && (
+          {footerMenu?.length > 0 && (
             <ul className="mt-10 md:mt-[100px]">
-              {menus.footer.map((item, index) => (
+              {footerMenu.map((item, index) => (
                 <li className="mb-4 md:mb-1 flex" key={`footer-menu-${index}`}>
                   <ArrowRight className="w-6 h-[25px] mr-2 stroke-white" />
                   <Link href={item.url}>{item.title}</Link>
@@ -33,9 +36,9 @@ const Footer = () => {
           )}
         </div>
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-          {menus.header?.length && (
+          {headerMenu?.length > 0 && (
             <ul className="flex md:items-center md:space-x-10 flex-col md:flex-row mt-8 md:mt-0">
-              {menus.header.map((item, index) => (
+              {headerMenu.map((item, index) => (
                 <li key={`header-menu-${index}`} className="mb-4 md:mb-0">
                   <Link href={item.url}>{item.title}</Link>
                 </li>
@@ -45,7 +48,7 @@ const Footer = () => {
           <div className="mt-10 md:mt-[74px]">
             <h2 className="text-[20px]">Canais de distribuição</h2>
             <Grid className="md:grid-cols-2">
-              {options.footer_channels?.length &&
+              {options.footer_channels?.length > 0 &&
                 options.footer_channels.map((item, index) => (
                   <div
                     className="col-span-12 md:col-span-1"
@@ -81,6 +84,7 @@ const Footer = () => {
             <Link
               href="https://www.futurebrand.com.br"
               target="_blank"
+              rel="noopener noreferrer"
               className="inline-block"
             >
               <FutureBrand />
