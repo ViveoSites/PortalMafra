@@ -4,7 +4,7 @@
 
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import Grid from '~/components/grid'
 import Link from '~/components/link'
@@ -17,16 +17,17 @@ const Header = () => {
   } = useGlobal()
 
   const router = useRouter()
+  const headerMenu = useMemo(() => menus?.['header-menu'], [menus])
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
-  }
+  const toggleMenu = useCallback(() => {
+    setMobileMenuOpen((oldMobileMenuOpen) => !oldMobileMenuOpen)
+  }, [])
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setMobileMenuOpen(false)
-  }
+  }, [])
 
   return (
     <header className="header fixed top-0 left-0 w-full z-50">
@@ -39,9 +40,9 @@ const Header = () => {
         </div>
 
         <div className="z-20 relative hidden md:flex col-span-8 col-start-3 items-center justify-center">
-          {menus.header?.length > 0 && (
+          {headerMenu?.length > 0 && (
             <ul className="flex items-center space-x-2 bg-white h-[58px] rounded-[100px] overflow-hidden">
-              {menus.header.map((item, index) => (
+              {headerMenu.map((item, index) => (
                 <li
                   key={`header-menu-${index}`}
                   className="h-full flex items-center"
@@ -106,9 +107,9 @@ const Header = () => {
             }
           )}
         >
-          {menus.header?.length && (
+          {headerMenu?.length && (
             <ul className="flex flex-col space-y-10 mt-[200px] px-8">
-              {menus.header.map((item, index) => (
+              {headerMenu.map((item, index) => (
                 <li key={`header-menu-${index}`} className="text-5xl">
                   <Link
                     href={item.url}
