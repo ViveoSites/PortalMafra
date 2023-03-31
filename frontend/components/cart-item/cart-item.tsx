@@ -34,12 +34,10 @@ const CartItem: React.FC<Properties> = ({
     cartItem.quantity = value
   }, [cartItem, value])
 
-  // Function to increase the value by 1
   const increaseValue = () => {
     setValue((previousValue) => previousValue + 1)
   }
 
-  // Function to decrease the value by 1
   const decreaseValue = () => {
     setValue((previousValue) => (previousValue > 0 ? previousValue - 1 : 0))
   }

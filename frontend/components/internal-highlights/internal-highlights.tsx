@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import classNames from 'classnames'
 import React, { useMemo } from 'react'
 

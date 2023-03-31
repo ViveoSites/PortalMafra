@@ -75,10 +75,9 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   // const { animationRef, topDownShowAnimation } = useScrollAnimation()
 
   const perPage = 20
-
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
-  const [pagination, setPagination] = useState([1, 2, 3])
+  const [pagination, setPagination] = useState([])
   const [productsData, setProductsData] = useState<any>([])
   const [categoriesData, setCategoriesData] = useState<any>([])
   const [suppliersData, setSuppliersData] = useState<any>([])

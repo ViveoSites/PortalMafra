@@ -48,7 +48,7 @@ export interface ICartFunctions {
   removeFromCart: (id: number) => void
   clearCart: () => void
   isInCart: (id: number) => number
-  getCartItem: (id: number) => void
+  getCartItem: (id: number) => any
   toggleCart: (value: boolean) => void
   cartOpen: boolean
 }

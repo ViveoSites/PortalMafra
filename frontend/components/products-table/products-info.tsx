@@ -26,7 +26,6 @@ const ProductsInfo: React.FC<Properties> = ({
   code,
   brand,
   presentation,
-  description,
   id,
   isOpen,
   onClose,
