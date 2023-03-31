@@ -16,6 +16,8 @@ import { default as OurAddresses } from '~/components/our-addresses'
 import { default as OurBrands } from '~/components/our-brands'
 import { default as OurLocations } from '~/components/our-locations'
 import { default as ProductCategories } from '~/components/product-categories'
+import { default as ProductsTable } from '~/components/products-table'
+import { default as SearchBar } from '~/components/search-bar'
 import { default as ServiceChannels } from '~/components/service-channels'
 import { default as TextWithImage } from '~/components/text-with-image'
 import { default as TextWithTitle } from '~/components/text-with-title'
@@ -41,8 +43,10 @@ const Blocks = {
   OurBrands,
   OurLocations,
   ProductCategories,
+  ProductsTable,
   IntegratedTech,
   ServiceChannels,
+  SearchBar,
   Video,
   VmiForm,
 }

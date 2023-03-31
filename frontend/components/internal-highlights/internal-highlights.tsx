@@ -1,11 +1,14 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import classNames from 'classnames'
 import React, { useMemo } from 'react'
 
 import Grid from '~/components/grid'
 import Image from '~/components/image'
 import RichText from '~/components/rich-text'
-import GradientCircleBl from '~/icons/gradientborder-circle-bl.svg'
-import GradientCircleTopRight from '~/icons/gradientborder-circle-tr.svg'
+import GradientRoundedBottomLeft from '~/icons/gradientborder-circle-bl.svg'
+import GradientRoundedTopRight from '~/icons/gradientborder-circle-tr.svg'
+import GradientCircularBottomRight from '~/icons/gradientborder-circular-br.svg'
+import GradientCircularTopLeft from '~/icons/gradientborder-circular-tl.svg'
 import GradientSquareRight from '~/icons/gradientborder-square-r.svg'
 import GradientSquareTopLeft from '~/icons/gradientborder-square-tl.svg'
 
@@ -65,7 +68,7 @@ const InternalHighlight: React.FC<Properties> = ({
       <Grid className="z-20 relative container bg-cover bg-no-repeat pt-[160px] pb-[48px] md:pt-[120px] md:pb-[72px] h-screen">
         <div
           className={classNames(
-            'col-span-12 md:col-span-5 text-black flex flex-col',
+            'col-span-12 lg:col-span-5 text-black flex flex-col',
             {
               'justify-center': text_align == 'center',
             }
@@ -79,15 +82,16 @@ const InternalHighlight: React.FC<Properties> = ({
                   [`tag-${colors.featured_color}`]: colors.featured_color,
                 }
               )}
-            >
-              {tagline_highlight}
-            </div>
+              dangerouslySetInnerHTML={{
+                __html: tagline_highlight,
+              }}
+            ></div>
           )}
           <div className={classNames('mb-6')}>
             <RichText
               htmlText={coloredTitle}
               className={classNames(
-                'lg:grid-cols-1 text-[40px] leading-[48px] md:text-[64px] md:leading-[68px]',
+                'lg:grid-cols-1 text-[40px] leading-[48px] md:text-[64px] md:leading-[68px] break-words',
                 {
                   [`text-${colors.text_color}`]: colors.text_color,
                 }
@@ -105,15 +109,20 @@ const InternalHighlight: React.FC<Properties> = ({
         </div>
         <div
           className={classNames(
-            'col-span-12 md:col-span-5 md:col-start-8 hidden md:flex md:items-center relative'
+            'col-span-12 hidden lg:flex lg:items-center relative',
+            {
+              'lg:col-span-6 lg:col-start-7':
+                image_format == 'square' || 'circle',
+              'lg:col-span-4 lg:col-start-8': image_format == 'rounded',
+            }
           )}
         >
-          <div className="relative">
+          <div className="relative w-full">
             {highlight_image && image_format === 'square' && (
               <>
                 <GradientSquareTopLeft
                   className={classNames(
-                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden 1.5xl:block',
+                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -122,7 +131,29 @@ const InternalHighlight: React.FC<Properties> = ({
                 />
                 <GradientSquareRight
                   className={classNames(
-                    'absolute -right-2 bottom-12 pointer-events-none z-10 hidden 1.5xl:block',
+                    'absolute -right-2 bottom-12 pointer-events-none z-10 hidden xl:block',
+                    {
+                      [`gradient-${colors.featured_color}`]:
+                        colors.featured_color,
+                    }
+                  )}
+                />
+              </>
+            )}
+            {highlight_image && image_format === 'rounded' && (
+              <>
+                <GradientRoundedTopRight
+                  className={classNames(
+                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden xl:block',
+                    {
+                      [`gradient-${colors.featured_color}`]:
+                        colors.featured_color,
+                    }
+                  )}
+                />
+                <GradientRoundedBottomLeft
+                  className={classNames(
+                    'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -133,18 +164,18 @@ const InternalHighlight: React.FC<Properties> = ({
             )}
             {highlight_image && image_format === 'circle' && (
               <>
-                <GradientCircleTopRight
+                <GradientCircularTopLeft
                   className={classNames(
-                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden 1.5xl:block',
+                    'absolute -left-2 -top-2 pointer-events-none z-10 object-contain hidden xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
                     }
                   )}
                 />
-                <GradientCircleBl
+                <GradientCircularBottomRight
                   className={classNames(
-                    'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden 1.5xl:block',
+                    'absolute -right-2 -bottom-2 pointer-events-none z-10 hidden xl:block',
                     {
                       [`gradient-${colors.featured_color}`]:
                         colors.featured_color,
@@ -158,10 +189,13 @@ const InternalHighlight: React.FC<Properties> = ({
               <Image
                 {...highlight_image}
                 className={classNames(
-                  'w-full h-[370px] md:h-[450px] 1.5xl:h-[600px] object-cover object-center',
+                  'w-full h-[370px] lg:h-[450px] xl:h-[560px] object-cover object-center',
                   {
                     'rounded-[32px]': image_format == 'square',
-                    'rounded-[1000px]': image_format == 'circle',
+                    'rounded-[1000px] max-w-[450px] lg:h-[580px] xl:h-[620px]':
+                      image_format == 'rounded',
+                    'rounded-[100%] lg:max-w-[460px] xl:max-w-[unset] lg:w-full xl:h-[590px]':
+                      image_format == 'circle',
                   }
                 )}
               />

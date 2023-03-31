@@ -14,3 +14,4 @@ include 'api/options.php';
 include 'api/menus.php';
 include 'api/cf7.php';
 include 'api/sitemap.php';
+include 'api/search.php';
