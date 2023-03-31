@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { m } from 'framer-motion'
 import React from 'react'
 
+import Button from '~/components/button'
 import Image from '~/components/image'
 import useScrollAnimation from '~/helpers/use-scroll-animation'
 
@@ -52,14 +53,14 @@ const ProductCategories: React.FC<Properties> = ({
                 <div className={classNames('text-base md:text-xl mb-8')}>
                   {item.description}
                 </div>
-                {/* {item.description && (
+                {item.acf?.category_page && (
                   <Button
                     extraClasses="justify-start"
                     label="Saiba mais"
-                    link="#"
+                    link={item.acf?.category_page}
                     target="_self"
                   />
-                )} */}
+                )}
               </div>
             </m.li>
           ))}

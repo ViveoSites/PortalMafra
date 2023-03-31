@@ -1,0 +1,33 @@
+.table {
+    @apply w-full
+}
+
+.table thead tr {
+    @apply h-[72px] border-solid border-b-lightness border-b
+}
+
+.table thead th {
+    @apply font-normal
+}
+
+.table tbody tr td {
+    @apply text-center py-4 px-2
+}
+
+.table tbody tr {
+    @apply border-solid border-b-lightness border-b
+}
+
+.table thead th td:first-child,
+.table tbody tr td:first-child {
+    @apply pl-4
+}
+
+.table thead th td:last-child,
+.table tbody tr td:last-child {
+    @apply pr-4
+}
+
+.table thead th, .table tbody td {
+    @apply py-2
+}
