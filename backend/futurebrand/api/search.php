@@ -8,8 +8,8 @@ function register_products_endpoint() {
     ));
 }
 
-function get_products($request) {
-    
+function get_products($request) 
+{
     $parentcategory = $request->get_param('parentcategory');
     $categories = $request->get_param('categories');
     $suppliers = $request->get_param('suppliers');
@@ -52,7 +52,6 @@ function get_products($request) {
     
     if (!empty($search) && $search != 'null') {
         $args['s'] = $search;
-        
     }
 
     $postsByCode = [];
@@ -93,18 +92,27 @@ function get_products($request) {
         $products[] = $product;
     }
 
-    $category_ids = array();
-    $suppliers_ids = array();
-    foreach ($products as $product) {
-        $categories = wp_get_post_terms($product['id'], 'product-category', array('fields' => 'ids'));
-        $category_ids = array_merge($category_ids, $categories);
-
-        $suppliers = wp_get_post_terms($product['id'], 'product-suppliers', array('fields' => 'ids'));
-        $suppliers_ids = array_merge($suppliers_ids, $suppliers);
-    }
     
     if ($search != '' && $search != 'null')
     {
+        $args = array(
+            'post_type' => 'products',
+            's' => $search,
+            'posts_per_page' => -1
+        );
+
+        $taxQuery = new WP_Query($args);
+        $category_ids = [];
+        $suppliers_ids = [];
+
+        foreach ($taxQuery->posts as $product) 
+        {
+            $categories = wp_get_post_terms($product->ID, 'product-category', array('fields' => 'ids'));
+            $category_ids[] = $categories[0];
+            $suppliers = wp_get_post_terms($product->ID, 'product-suppliers', array('fields' => 'ids'));
+            $suppliers_ids[] = $suppliers[0];
+        }
+
         $category_ids = array_unique($category_ids);
         $suppliers_ids = array_unique($suppliers_ids);
 
@@ -136,9 +144,20 @@ function get_products($request) {
             );
             $suppliers[] = $supplier_term;
         }
+
     }
     else 
     {
+        $category_ids = array();
+        $suppliers_ids = array();
+        foreach ($products as $product) {
+            $categories = wp_get_post_terms($product['id'], 'product-category', array('fields' => 'ids'));
+            $category_ids = array_merge($category_ids, $categories);
+
+            $suppliers = wp_get_post_terms($product['id'], 'product-suppliers', array('fields' => 'ids'));
+            $suppliers_ids = array_merge($suppliers_ids, $suppliers);
+        }
+
         $category_ids = array_unique($category_ids);
         $suppliers_ids = array_unique($suppliers_ids);
 
@@ -181,8 +200,7 @@ function get_products($request) {
             $suppliers[] = $supplier_term;
         }
     }
-
-    // Prepare the output
+    
     $output = array(
         'products' => $products,
         'items_total' => $query->found_posts,
@@ -190,6 +208,5 @@ function get_products($request) {
         'suppliers' => $suppliers
     );
 
-    // Return the output in JSON format
     return rest_ensure_response($output);
 }
