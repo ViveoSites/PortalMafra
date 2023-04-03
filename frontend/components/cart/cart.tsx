@@ -150,7 +150,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                   <button
                     type="submit"
                     className={classNames(
-                      'bg-darkness text-white flex py-[18px] px-8 rounded-[100px] text-base border-[1px] border-darkness hover:text-darkness hover:fill-darkness hover:stroke-darkness hover:bg-white items-center justify-center ml-auto',
+                      'bg-darkness text-white flex py-[18px] px-5 md:px-8 rounded-[100px] text-base border-[1px] border-darkness hover:text-darkness hover:fill-darkness hover:stroke-darkness hover:bg-white items-center justify-center ml-auto',
                       { hidden: cart.cartItems.length === 0 }
                     )}
                     onClick={() => {
@@ -158,7 +158,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                     }}
                   >
                     Solicitar Orçamento
-                    <CartIcon className="w-6 h-6 ml-4" />
+                    <CartIcon className="w-6 h-6 ml-2 md:ml-4" />
                   </button>
                 </div>
               )}
