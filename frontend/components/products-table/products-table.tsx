@@ -13,6 +13,8 @@ import Grid from '~/components/grid'
 import useGlobal from '~/hooks/use-global'
 import AddToCart from '~/icons/add-to-cart.svg'
 import AddedToCart from '~/icons/added-to-cart.svg'
+import CloseButton from '~/icons/close-button.svg'
+import FilterIcon from '~/icons/filter.svg'
 import Loader from '~/icons/loader.svg'
 import Plus from '~/icons/plus.svg'
 import Search from '~/icons/search.svg'
@@ -85,11 +87,10 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [filterLoading, setFilterLoading] = useState(true)
-  const [searchTerm, setSearchTerm] = useState(
-    new URLSearchParams(
-      typeof window === 'undefined' ? '' : window.location.search
-    ).get('termo')
-  )
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
+
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
   const [selectedProducts, setSelectedProducts] = useState(category)
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -110,6 +111,14 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   const filteredSuppliers = suppliersData.filter((item) =>
     item.name.toLowerCase().includes(filterSuppliersValue.toLowerCase())
   )
+
+  useEffect(() => {
+    const term = new URLSearchParams(
+      typeof window === 'undefined' ? '' : window.location.search
+    ).get('termo')
+    if (term != '') setSearchTerm(term)
+    setIsMobile(window.innerWidth < 767)
+  }, [])
 
   useEffect(() => {
     setLoading(true)
@@ -229,7 +238,26 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
     <section className="mb-[60px]">
       {/* <m.div {...topDownShowAnimation()}> */}
       <Grid className="my-10 container">
-        <div className="col-span-3">
+        <div
+          className={classNames('col-span-3 md:block', {
+            'block fixed inset-0 z-50 bg-white w-screen h-screen overflow-scroll':
+              mobileFiltersOpen,
+            hidden: !mobileFiltersOpen,
+          })}
+        >
+          {mobileFiltersOpen && (
+            <div className="flex mb-7 mt-7 container">
+              <span className="text-3xl">Filtrar por</span>
+              <button
+                onClick={() => {
+                  setMobileFiltersOpen(false)
+                }}
+                className="ml-auto"
+              >
+                <CloseButton />
+              </button>
+            </div>
+          )}
           {selectedProducts.length > 1 && (
             <div className="w-full rounded-2xl bg-white p-5 mb-5">
               <span className="text-xl inline-block mb-4">Produtos</span>
@@ -357,16 +385,30 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
               type="text"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="O que você procura? Digite o nome ou código do produto."
+              placeholder={
+                isMobile
+                  ? 'O que você procura?'
+                  : 'O que você procura? Digite o nome ou código do produto.'
+              }
             />
             <Search className="top-1/2 left-8 -translate-y-1/2 absolute" />
           </form>
+          <div className="md:hidden flex justify-end mb-10">
+            <button
+              className="flex"
+              onClick={() => {
+                setMobileFiltersOpen(true)
+              }}
+            >
+              <FilterIcon className="mr-3" /> Filtrar por
+            </button>
+          </div>
           <div className="bg-white w-full rounded-2xl overflow-hidden">
             <div className="hover:bg-[#b5e881]"></div>
             <div className="hover:bg-[#c8dcf9]"></div>
             <div className="hover:bg-[#a5a4f0]"></div>
             <table className={styles.table}>
-              <thead>
+              <thead className="hidden md:table-header-group">
                 <tr>
                   <th>Código</th>
                   <th>Categoria</th>
@@ -381,27 +423,44 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
                   productsData.map((item, index) => (
                     <tr
                       key={index}
-                      className={classNames('', {
+                      className={classNames('hover:cursor-pointer', {
                         [`hover:bg-[${item.color}]`]: item.color,
                       })}
+                      onClick={() => setSelectedProduct(index)}
                     >
-                      <td className="w-[80px]">{item.code}</td>
-                      <td className="w-[140px]">{item.category}</td>
-                      <td className="w-[100px]">{item.brand}</td>
-                      <td>{toTitleCase(item.title)}</td>
-                      <td className="w-[160px]">{item.presentation}</td>
-                      <td className="w-[180px]">
+                      <td className="w-[80px] hidden md:table-cell">
+                        {item.code}
+                      </td>
+                      <td className="w-[140px] hidden md:table-cell">
+                        {item.category}
+                      </td>
+                      <td className="w-[100px] hidden md:table-cell">
+                        {item.brand}
+                      </td>
+                      <td>
+                        <div className="md:hidden w-full text-sm mb-3">
+                          {item.category} | {item.brand}
+                        </div>
+                        {toTitleCase(item.title)}
+                      </td>
+                      <td className="w-[160px] hidden md:table-cell">
+                        {item.presentation}
+                      </td>
+                      <td className="w-[50px] md:w-[180px]">
                         <div className="flex items-center justify-center text-[14px]">
                           <button
                             onClick={() => setSelectedProduct(index)}
-                            className="flex flex-col items-center cursor-pointer"
+                            className="flex-col items-center cursor-pointer hidden md:flex"
                           >
                             <Plus />
                             Saiba mais
                           </button>
                           <button
-                            className="w-16 ml-3 flex flex-col items-center text-sm-2 cursor-pointer"
-                            onClick={() => cart.addToCart(item)}
+                            className="w-16 md:ml-3 flex flex-col items-center text-sm-2 cursor-pointer"
+                            onClick={(event) => {
+                              cart.addToCart(item)
+                              event.stopPropagation()
+                            }}
                           >
                             {cart.isInCart(item.id) === 0 && (
                               <>

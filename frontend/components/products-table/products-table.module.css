@@ -11,7 +11,15 @@
 }
 
 .table tbody tr td {
-    @apply text-center py-4 px-2
+    @apply md:text-center py-4 px-2
+}
+
+.table tbody tr td:nth-child(4) {
+    @apply px-4 pr-0  md:pl-2 md:pr-2
+}
+
+.table tbody tr td:last-child {
+    @apply pr-8 md:pr-2
 }
 
 .table tbody tr {

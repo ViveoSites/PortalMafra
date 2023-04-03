@@ -55,7 +55,7 @@ const ProductsInfo: React.FC<Properties> = ({
     >
       <div
         className={classNames(
-          `relative w-full bg-white px-4 md:px-20 py-20 md:rounded-3xl overflow-y-auto md:max-w-[900px]`
+          `relative w-full bg-white px-6 md:px-20 py-10 md:py-20 rounded-t-3xl md:rounded-3xl overflow-y-auto md:max-w-[900px]`
         )}
       >
         <h2 className="text-3xl mb-4">{title}</h2>

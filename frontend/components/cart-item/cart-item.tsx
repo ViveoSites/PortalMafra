@@ -49,12 +49,12 @@ const CartItem: React.FC<Properties> = ({
   return (
     <div className="grid grid-cols-12 gap-x-4">
       <div className={classNames('col-span-7 md:col-span-8 pt-6')}>
-        <p className="text-base mb-4">
+        <p className="text-sm md:text-base mb-4">
           {code} | {parentCategory} | {category} | {brand}
         </p>
       </div>
       <div className={classNames('col-span-7 md:col-span-8')}>
-        <p className="text-xl">{title}</p>
+        <p className="text-base md:text-xl">{title}</p>
       </div>
       <div
         className={classNames(
