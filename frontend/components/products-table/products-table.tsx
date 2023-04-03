@@ -1,6 +1,3 @@
-/* eslint-disable sonarjs/no-identical-functions */
-/* eslint-disable unicorn/consistent-function-scoping */
-/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import classNames from 'classnames'
@@ -58,19 +55,15 @@ const fetchData = async ({
   suppliers = '',
   term = '',
 }) => {
-  try {
-    const { data } = await getProductsData({
-      term,
-      parentcategory,
-      page,
-      categories,
-      suppliers,
-      perpage,
-    })
-    return data
-  } catch (error) {
-    alert(error)
-  }
+  const { data } = await getProductsData({
+    term,
+    parentcategory,
+    page,
+    categories,
+    suppliers,
+    perpage,
+  })
+  return data
 }
 
 const ProductsTable: React.FC<Properties> = ({ category }) => {
@@ -92,7 +85,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  const [selectedProducts, setSelectedProducts] = useState(category)
+  const [selectedProducts, setSelectedProducts] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [seletectedSuppliers, setSelectedSuppliers] = useState([])
 
@@ -103,6 +96,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
 
   const { cart } = useGlobal()
   const searchReference = useRef(null)
+  const searchFieldReference = useRef(null)
 
   const filteredCategories = categoriesData.filter((item) =>
     item.name.toLowerCase().includes(filterCategoriesValue.toLowerCase())
@@ -118,47 +112,14 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
     ).get('termo')
     if (term != '') setSearchTerm(term)
     setIsMobile(window.innerWidth < 767)
+    setSelectedProducts(category)
   }, [])
 
   useEffect(() => {
     setLoading(true)
     setProductsData([])
-    const fetchDataAsync = async () => {
-      const fetchedData = await fetchData({
-        page: 0,
-        perpage: perPage,
-        parentcategory: selectedProducts.join(','),
-        categories: selectedCategories.join(','),
-        suppliers: seletectedSuppliers.join(','),
-        term: searchTerm,
-      })
-      setProductsData(fetchedData.products)
-      setTotalPages(Math.ceil(fetchedData.items_total / perPage))
-      setLoading(false)
-    }
-    fetchDataAsync()
-    adjustPagination()
+    setPage(0)
   }, [selectedCategories, seletectedSuppliers, selectedProducts])
-
-  useEffect(() => {
-    setLoading(true)
-    setFilterLoading(true)
-    const fetchDataAsync = async () => {
-      const fetchedData = await fetchData({
-        page: 0,
-        perpage: perPage,
-        parentcategory: selectedProducts.join(','),
-        term: searchTerm,
-      })
-      setProductsData(fetchedData.products)
-      setCategoriesData(fetchedData.categories)
-      setSuppliersData(fetchedData.suppliers)
-      setTotalPages(Math.ceil(fetchedData.items_total / perPage))
-      setLoading(false)
-      setFilterLoading(false)
-    }
-    fetchDataAsync()
-  }, [category])
 
   useEffect(() => {
     adjustPagination()
@@ -182,17 +143,22 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   }
 
   function handleSearch(event) {
+    setSearchTerm(searchFieldReference.current.value)
+    event.preventDefault()
+  }
+
+  useEffect(() => {
+    if (searchReference.current && page != 0) {
+      searchReference.current.scrollIntoView({
+        block: 'start',
+      })
+    }
+
     setLoading(true)
-    setFilterLoading(true)
-    setPage(0)
     setProductsData([])
-    setCategoriesData([])
-    setSuppliersData([])
-    setSelectedCategories([])
-    setSelectedSuppliers([])
     const fetchDataAsync = async () => {
       const fetchedData = await fetchData({
-        page: 0,
+        page: page,
         perpage: perPage,
         parentcategory: selectedProducts.join(','),
         term: searchTerm,
@@ -205,30 +171,8 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
       setFilterLoading(false)
     }
     fetchDataAsync()
-    event.preventDefault()
-  }
-
-  useEffect(() => {
-    if (searchReference.current && page != 0) {
-      searchReference.current.scrollIntoView({
-        block: 'start',
-      })
-    }
-    setLoading(true)
-    setProductsData([])
-    const fetchDataAsync = async () => {
-      const fetchedData = await fetchData({
-        page: page,
-        perpage: perPage,
-        parentcategory: selectedProducts.join(','),
-        term: searchTerm,
-      })
-      setProductsData(fetchedData.products)
-      setLoading(false)
-    }
-    fetchDataAsync()
     adjustPagination()
-  }, [page])
+  }, [page, searchTerm])
 
   useEffect(() => {
     if (selectedProduct >= 0) setIsModalOpen(true)
@@ -276,55 +220,58 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
               </ul>
             </div>
           )}
-          <div className="w-full rounded-2xl bg-white p-5 mb-5">
-            <span className="text-xl inline-block mb-4">Categoria</span>
-            {filterLoading && (
-              <span className="w-full py-8 justify-center flex">
-                <Loader width="24" className="animate-spin" />
-              </span>
-            )}
-            {categoriesData?.length > 10 && (
-              <form>
-                <input
-                  className="border border-lightness border-solid px-4 py-2 w-full mb-4 rounded-2xl"
-                  type="text"
-                  placeholder="Buscar categorias"
-                  onChange={(event) =>
-                    setFilterCategoriesValue(event.target.value)
-                  }
-                />
-              </form>
-            )}
-            <ul>
-              {categoriesData?.length > 0 &&
-                categoriesData &&
-                filteredCategories
-                  .slice(
-                    0,
-                    filterCategoriesAll && filterCategoriesValue === ''
-                      ? 1000
-                      : 10
-                  )
-                  .map((item, index) => (
-                    <li className="text-base flex mb-2" key={index}>
-                      <Checkbox
-                        categoryId={item.id}
-                        selectedCategories={selectedCategories}
-                        setSelectedCategories={setSelectedCategories}
-                      />
-                      <span>{item.name}</span>
-                    </li>
-                  ))}
-            </ul>
-            {categoriesData?.length > 10 && !filterCategoriesAll && (
-              <button
-                className="w-full rounded-2xl bg-darkness text-white flex items-center justify-center py-2 mt-4"
-                onClick={() => setFilterCategoriesAll(true)}
-              >
-                Ver todas
-              </button>
-            )}
-          </div>
+          {categoriesData?.length > 1 && (
+            <div className="w-full rounded-2xl bg-white p-5 mb-5">
+              <span className="text-xl inline-block mb-4">Categoria</span>
+              {filterLoading && (
+                <span className="w-full py-8 justify-center flex">
+                  <Loader width="24" className="animate-spin" />
+                </span>
+              )}
+              {categoriesData?.length > 10 && (
+                <form>
+                  <input
+                    className="border border-lightness border-solid px-4 py-2 w-full mb-4 rounded-2xl"
+                    type="text"
+                    value={undefined}
+                    placeholder="Buscar categorias"
+                    onChange={(event) =>
+                      setFilterCategoriesValue(event.target.value)
+                    }
+                  />
+                </form>
+              )}
+              <ul>
+                {categoriesData?.length > 0 &&
+                  categoriesData &&
+                  filteredCategories
+                    .slice(
+                      0,
+                      filterCategoriesAll && filterCategoriesValue === ''
+                        ? 1000
+                        : 10
+                    )
+                    .map((item, index) => (
+                      <li className="text-base flex mb-2" key={index}>
+                        <Checkbox
+                          categoryId={item.id}
+                          selectedCategories={selectedCategories}
+                          setSelectedCategories={setSelectedCategories}
+                        />
+                        <span>{item.name}</span>
+                      </li>
+                    ))}
+              </ul>
+              {categoriesData?.length > 10 && !filterCategoriesAll && (
+                <button
+                  className="w-full rounded-2xl bg-darkness text-white flex items-center justify-center py-2 mt-4"
+                  onClick={() => setFilterCategoriesAll(true)}
+                >
+                  Ver todas
+                </button>
+              )}
+            </div>
+          )}
           <div className="w-full rounded-2xl bg-white p-5 mb-5">
             <span className="text-xl inline-block mb-4">Fornecedores</span>
             {filterLoading && (
@@ -337,6 +284,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
                 <input
                   className="border border-lightness border-solid px-4 py-2 w-full mb-4 rounded-2xl"
                   type="text"
+                  value={undefined}
                   placeholder="Buscar fornecedores"
                   onChange={(event) =>
                     setFilterSuppliersValue(event.target.value)
@@ -383,8 +331,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
             <input
               className="w-full h-[58px] rounded-[100px] pl-16"
               type="text"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
+              ref={searchFieldReference}
               placeholder={
                 isMobile
                   ? 'O que você procura?'
@@ -495,13 +442,13 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
               {!loading &&
                 pagination.map((item, index) => (
                   <button
-                    onClick={() => setPage(item)}
+                    onClick={() => setPage(index)}
                     key={index}
                     className={classNames(
                       'text-darkness flex items-center justify-center cursor-auto',
                       {
-                        'bg-darkness': page == item,
-                        'text-white': page == item,
+                        'bg-darkness': page == index,
+                        'text-white': page == index,
                         'w-4 pointer-events-none': typeof item === 'number',
                         'w-8 h-8 rounded-[32px] border-solid border-2 border-darkness pointer-events-auto !cursor-pointer':
                           typeof item === 'number',
