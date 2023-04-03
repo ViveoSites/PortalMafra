@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import classNames from 'classnames'
 // import { m } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
@@ -116,8 +115,6 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   }, [])
 
   useEffect(() => {
-    setLoading(true)
-    setProductsData([])
     setPage(0)
   }, [selectedCategories, seletectedSuppliers, selectedProducts])
 
@@ -161,6 +158,8 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
         page: page,
         perpage: perPage,
         parentcategory: selectedProducts.join(','),
+        categories: selectedCategories.join(','),
+        suppliers: seletectedSuppliers.join(','),
         term: searchTerm,
       })
       setProductsData(fetchedData.products)
@@ -172,7 +171,13 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
     }
     fetchDataAsync()
     adjustPagination()
-  }, [page, searchTerm])
+  }, [
+    page,
+    searchTerm,
+    selectedCategories,
+    seletectedSuppliers,
+    selectedProducts,
+  ])
 
   useEffect(() => {
     if (selectedProduct >= 0) setIsModalOpen(true)
