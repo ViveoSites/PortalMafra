@@ -13,6 +13,11 @@ interface Properties {
   columns_number: number
 }
 
+function getSlug(url) {
+  const urlParts = url.split('/')
+  return urlParts[urlParts.length - 2]
+}
+
 const ProductCategories: React.FC<Properties> = ({
   categories,
   columns_number,
@@ -57,7 +62,7 @@ const ProductCategories: React.FC<Properties> = ({
                   <Button
                     extraClasses="justify-start"
                     label="Saiba mais"
-                    link={item.acf?.category_page}
+                    link={getSlug(item.acf?.category_page)}
                     target="_self"
                   />
                 )}
