@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useFormik } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { validateCNPJ, validatePhone } from 'validations-br'
 import * as Yup from 'yup'
 
 import Modal from '~/components/modal'
@@ -9,6 +10,7 @@ import useGlobal from '~/hooks/use-global'
 import CartIcon from '~/icons/cart.svg'
 import CloseButton from '~/icons/close-button.svg'
 import { sendFormData } from '~/services/forms'
+import * as Masks from '~/utils/masks'
 
 import CartItem from '../cart-item'
 import Grid from '../grid'
@@ -25,18 +27,18 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
   const FormSchema = Yup.object().shape({
     yourName: Yup.string().required(),
     yourCompany: Yup.string().required(),
-    yourCNPJ: Yup.string().required(),
+    yourCNPJ: Yup.string()
+      .required()
+      .test('is-cnpj', 'CPNJ inválido', (value) => validateCNPJ(value ?? '')),
     yourEmail: Yup.string().email().required(),
-    yourPhone: Yup.string().required(),
+    yourPhone: Yup.string()
+      .required()
+      .test('is-phone', 'Telefone inválido', (value) =>
+        validatePhone(value ?? '')
+      ),
     yourCity: Yup.string().required(),
     yourState: Yup.string().required(),
   })
-
-  useEffect(() => {
-    if (cart.cartItems.length === 0) {
-      setShowForm(false)
-    }
-  }, [cart.cartItems.length])
 
   const [showForm, setShowForm] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -44,6 +46,22 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
   const [formMessageFeedback, setFormMessageFeedback] = useState('')
 
   const formId = 0
+  const formReference = useRef(null)
+
+  useEffect(() => {
+    if (cart.cartItems.length === 0) {
+      setShowForm(false)
+    }
+  }, [cart.cartItems.length])
+
+  useEffect(() => {
+    if (showForm) {
+      formReference.current.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      })
+    }
+  }, [showForm])
 
   const formik = useFormik({
     initialValues: {
@@ -165,6 +183,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
             </div>
           </div>
           <div
+            ref={formReference}
             className={classNames(
               'col-span-12 md:col-span-8 md:col-start-5 1.5xl:col-span-5 1.5xl:col-start-8 overflow-hidden scrollbar-hide py-10 pl-6 pr-10 bg-neutralDefault text-darkness',
               { block: showForm, hidden: !showForm }
@@ -230,7 +249,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                   type="text"
                   name="yourCNPJ"
                   onChange={formik.handleChange}
-                  value={formik.values.yourCNPJ}
+                  value={Masks.cnpj(formik.values.yourCNPJ)}
                   className={classNames(styles.input, {
                     [styles.inputError]:
                       formik.errors.yourCNPJ && formik.touched.yourCNPJ,
@@ -266,7 +285,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                   type="text"
                   name="yourPhone"
                   onChange={formik.handleChange}
-                  value={formik.values.yourPhone}
+                  value={Masks.phone(formik.values.yourPhone)}
                   className={classNames(styles.input, {
                     [styles.inputError]:
                       formik.errors.yourPhone && formik.touched.yourPhone,

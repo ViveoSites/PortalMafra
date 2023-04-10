@@ -44,7 +44,7 @@ const InternalHighlight: React.FC<Properties> = ({
   return (
     <section
       className={classNames(
-        'internal-highlights bg-[-130px_center] md:bg-center min-h-screen relative'
+        'internal-highlights bg-[-130px_center] md:bg-center min-h-[800px] relative'
       )}
     >
       <Image

@@ -58,12 +58,18 @@ const CartItem: React.FC<Properties> = ({
       </div>
       <div
         className={classNames(
-          'col-span-5 md:col-span-4 col-start-8 md:col-start-9 text-2xl flex items-center gap-x-2 xl:gap-x-4 pb-6'
+          'col-span-5 md:col-span-4 col-start-8 md:col-start-9 text-2xl flex items-center space-between xl:gap-x-4 pb-6'
         )}
       >
-        <MinusIcon className="cursor-pointer" onClick={decreaseValue} />
-        <p className={classNames('text-xl px-3')}>{cartItem.quantity}</p>
-        <PlusIcon className="cursor-pointer" onClick={increaseValue} />
+        <div className="w-6">
+          <MinusIcon className="cursor-pointer" onClick={decreaseValue} />
+        </div>
+        <p className={classNames('text-xl w-12 text-center')}>
+          {cartItem.quantity}
+        </p>
+        <div className="w-6">
+          <PlusIcon className="cursor-pointer" onClick={increaseValue} />
+        </div>
         <ThrashIcon className="cursor-pointer ml-auto" onClick={handleDelete} />
       </div>
     </div>

@@ -8,8 +8,8 @@ function register_products_endpoint() {
     ));
 }
 
-function get_products($request) 
-{
+function get_products($request) {
+    
     $parentcategory = $request->get_param('parentcategory');
     $categories = $request->get_param('categories');
     $suppliers = $request->get_param('suppliers');
@@ -141,6 +141,7 @@ function get_products($request)
             $supplier_term = array(
                 'id' => $supplier_term->term_id,
                 'name' => $supplier_term->name,
+                'category' => get_field('related-categories', 'product-suppliers_' . $supplier_term->term_id)
             );
             $suppliers[] = $supplier_term;
         }
@@ -165,13 +166,16 @@ function get_products($request)
 
         if (sizeof($parentCats) > 1)
         {
-            $category_terms = get_terms(array(
-            'taxonomy' => 'product-category',
-            'hide_empty' => true,
-        ));
-        } else
+            $category_terms = get_terms(array
+            (
+                'taxonomy' => 'product-category',
+                'hide_empty' => true,
+            ));
+        } 
+        else
         {
-            $category_terms = get_terms(array(
+            $category_terms = get_terms(array
+            (
                 'taxonomy' => 'product-category',
                 'hide_empty' => true,
                 'child_of' => $parentCats[0],
@@ -191,16 +195,24 @@ function get_products($request)
             'taxonomy' => 'product-suppliers',
             'hide_empty' => true,
         ));
+
+        
         $suppliers = array();
-        foreach ($suppliers_terms as $supplier_term) {
-            $supplier_term = array(
-                'id' => $supplier_term->term_id,
-                'name' => $supplier_term->name,
-            );
-            $suppliers[] = $supplier_term;
+        foreach ($suppliers_terms as $supplier_term) 
+        {
+            $termCategories = get_field('related-categories', 'product-suppliers_' . $supplier_term->term_id);
+            if (!empty(array_intersect($termCategories, $parentCats))) {
+                $supplier_term = array(
+                    'id' => $supplier_term->term_id,
+                    'name' => $supplier_term->name,
+                    'category' => $termCategories
+                );
+                $suppliers[] = $supplier_term;
+            }
         }
     }
-    
+
+    // Prepare the output
     $output = array(
         'products' => $products,
         'items_total' => $query->found_posts,
@@ -208,5 +220,6 @@ function get_products($request)
         'suppliers' => $suppliers
     );
 
+    // Return the output in JSON format
     return rest_ensure_response($output);
 }
