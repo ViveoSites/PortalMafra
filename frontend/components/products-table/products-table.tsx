@@ -69,7 +69,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   // const { animationRef, topDownShowAnimation } = useScrollAnimation()
 
   const perPage = 20
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [pagination, setPagination] = useState([])
   const [productsData, setProductsData] = useState<any>([])
@@ -84,7 +84,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
-  const [selectedProducts, setSelectedProducts] = useState([])
+  const [selectedParentCategory, setSelectedParentCategory] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [seletectedSuppliers, setSelectedSuppliers] = useState([])
 
@@ -109,14 +109,17 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
     const term = new URLSearchParams(
       typeof window === 'undefined' ? '' : window.location.search
     ).get('termo')
-    if (term != '') setSearchTerm(term)
+    if (term != undefined) setSearchTerm(term)
     setIsMobile(window.innerWidth < 767)
-    setSelectedProducts(category)
   }, [])
 
   useEffect(() => {
+    setSelectedParentCategory(category)
+  }, [category])
+
+  useEffect(() => {
     setPage(0)
-  }, [selectedCategories, seletectedSuppliers, selectedProducts])
+  }, [selectedCategories, seletectedSuppliers, selectedParentCategory])
 
   useEffect(() => {
     adjustPagination()
@@ -145,19 +148,13 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
   }
 
   useEffect(() => {
-    if (searchReference.current && page != 0) {
-      searchReference.current.scrollIntoView({
-        block: 'start',
-      })
-    }
-
     setLoading(true)
     setProductsData([])
     const fetchDataAsync = async () => {
       const fetchedData = await fetchData({
         page: page,
         perpage: perPage,
-        parentcategory: selectedProducts.join(','),
+        parentcategory: selectedParentCategory.join(','),
         categories: selectedCategories.join(','),
         suppliers: seletectedSuppliers.join(','),
         term: searchTerm,
@@ -168,6 +165,16 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
       setTotalPages(Math.ceil(fetchedData.items_total / perPage))
       setLoading(false)
       setFilterLoading(false)
+      if (
+        selectedCategories.length > 0 ||
+        seletectedSuppliers.length > 0 ||
+        page > 0 ||
+        searchTerm != ''
+      ) {
+        searchReference.current.scrollIntoView({
+          block: 'start',
+        })
+      }
     }
     fetchDataAsync()
     adjustPagination()
@@ -176,7 +183,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
     searchTerm,
     selectedCategories,
     seletectedSuppliers,
-    selectedProducts,
+    selectedParentCategory,
   ])
 
   useEffect(() => {
@@ -207,17 +214,17 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
               </button>
             </div>
           )}
-          {selectedProducts.length > 1 && (
+          {selectedParentCategory.length > 1 && (
             <div className="w-full rounded-2xl bg-white p-5 mb-5">
               <span className="text-xl inline-block mb-4">Produtos</span>
               <ul>
-                {selectedProducts &&
-                  selectedProducts.map((item, index) => (
+                {selectedParentCategory &&
+                  selectedParentCategory.map((item, index) => (
                     <li className="text-base flex mb-2" key={index}>
                       <Checkbox
                         categoryId={item}
-                        selectedCategories={selectedProducts}
-                        setSelectedCategories={setSelectedProducts}
+                        selectedCategories={selectedParentCategory}
+                        setSelectedCategories={setSelectedParentCategory}
                       />
                       <span>{getCategoryNameById(item)}</span>
                     </li>
@@ -383,7 +390,7 @@ const ProductsTable: React.FC<Properties> = ({ category }) => {
                       <td className="w-[80px] hidden md:table-cell">
                         {item.code}
                       </td>
-                      <td className="w-[140px] hidden md:table-cell">
+                      <td className="w-[140px] hidden md:table-cell text-left">
                         {item.category}
                       </td>
                       <td className="w-[100px] hidden md:table-cell">
