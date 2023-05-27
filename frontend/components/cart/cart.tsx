@@ -30,7 +30,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
     yourCNPJ: Yup.string()
       .required()
       .test('is-cnpj', 'CPNJ inválido', (value) => validateCNPJ(value ?? '')),
-    yourEmailAddress: Yup.string().email().required(),
+    yourEmail: Yup.string().email().required(),
     yourPhone: Yup.string()
       .required()
       .test('is-phone', 'Telefone inválido', (value) =>
@@ -45,7 +45,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [formMessageFeedback, setFormMessageFeedback] = useState('')
 
-  const formId = 5830
+  const formId = 0
   const formReference = useRef(null)
 
   useEffect(() => {
@@ -68,11 +68,10 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
       yourName: '',
       yourCompany: '',
       yourCNPJ: '',
-      yourEmailAddress: '',
+      yourEmail: '',
       yourPhone: '',
       yourCity: '',
       yourState: '',
-      products: '',
     },
     validationSchema: FormSchema,
     onSubmit: async (values) => {
@@ -81,11 +80,6 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
       }
 
       setIsLoading(true)
-
-      for (const product of cart.cartItems) {
-        const { code, title, quantity } = product
-        values.products += `Código: ${code}, Produto: ${title}, Quantidade ${quantity} <br />`
-      }
 
       const response = await sendFormData({
         formId,
@@ -96,12 +90,9 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
       setIsSubmitted(true)
       setIsLoading(false)
 
-      values.products = ''
-
       setTimeout(() => {
         setIsSubmitted(true)
         setFormMessageFeedback('')
-        cart.clearCart()
       }, 4000)
     },
   })
@@ -269,21 +260,19 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="yourEmailAddress" className={styles.label}>
+                <label htmlFor="yourEmail" className={styles.label}>
                   Email
                 </label>
                 <input
                   type="email"
-                  name="yourEmailAddress"
+                  name="yourEmail"
                   onChange={formik.handleChange}
-                  value={formik.values.yourEmailAddress}
+                  value={formik.values.yourEmail}
                   className={classNames(styles.input, {
                     [styles.inputError]:
-                      formik.errors.yourEmailAddress &&
-                      formik.touched.yourEmailAddress,
+                      formik.errors.yourEmail && formik.touched.yourEmail,
                     [styles.inputDefault]:
-                      !formik.errors.yourEmailAddress ||
-                      !formik.touched.yourEmailAddress,
+                      !formik.errors.yourEmail || !formik.touched.yourEmail,
                   })}
                   required
                 />
@@ -342,7 +331,7 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                   required
                 />
               </div>
-              <div className="flex items-end flex-col">
+              <div className="flex justify-between items-center ">
                 <button
                   type="submit"
                   className={styles.btn}
@@ -352,8 +341,8 @@ const Cart: React.FC<Properties> = ({ isOpen, onClose }) => {
                   <CartIcon className="w-6 h-6 ml-4" />
                 </button>
                 {isSubmitted && formMessageFeedback && (
-                  <div className="mt-4">
-                    <p className="text-right">{formMessageFeedback}</p>
+                  <div>
+                    <p>{formMessageFeedback}</p>
                   </div>
                 )}
               </div>

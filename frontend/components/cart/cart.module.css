@@ -12,11 +12,11 @@
 }
 
 .inputDefault {
-  @apply border-darkness h-9 px-0 text-darkness;
+  @apply border-darkness h-[24px] px-0 text-darkness;
 }
 
 .inputError {
-  @apply border-danger h-9 border-opacity-30 bg-opacity-10;
+  @apply border-danger border-opacity-30 bg-opacity-10;
 }
 
 .btn {
