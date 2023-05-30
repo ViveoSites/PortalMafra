@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { m } from 'framer-motion'
 import React from 'react'
 
+import Button from '~/components/button'
 import Image from '~/components/image'
 import useScrollAnimation from '~/helpers/use-scroll-animation'
 
@@ -10,6 +11,11 @@ interface Properties {
   contents: string
   categories: any
   columns_number: number
+}
+
+function getSlug(url) {
+  const urlParts = url.split('/')
+  return urlParts[urlParts.length - 2]
 }
 
 const ProductCategories: React.FC<Properties> = ({
@@ -52,14 +58,14 @@ const ProductCategories: React.FC<Properties> = ({
                 <div className={classNames('text-base md:text-xl mb-8')}>
                   {item.description}
                 </div>
-                {/* {item.description && (
+                {item.acf?.category_page && (
                   <Button
                     extraClasses="justify-start"
                     label="Saiba mais"
-                    link="#"
+                    link={getSlug(item.acf?.category_page)}
                     target="_self"
                   />
-                )} */}
+                )}
               </div>
             </m.li>
           ))}
