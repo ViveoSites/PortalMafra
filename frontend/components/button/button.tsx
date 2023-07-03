@@ -6,7 +6,7 @@ import Link from '~/components/link'
 interface Properties {
   label: string
   link: string
-  target: string
+  target?: string
   extraClasses?: string
   buttonExtraClasses?: string
 }
