@@ -17,7 +17,7 @@ const DynamicPages = dynamic(() => import('~/layouts/dynamic-page'), {
 
 interface Properties {
   notFound: boolean
-  notFoundMessage: string
+  // notFoundMessage: string
   postType: string
   pageData: any
   pageUrl: string
@@ -28,7 +28,6 @@ interface Properties {
 
 const DynamicDeepPage: React.FC<Properties> = ({
   notFound,
-  notFoundMessage,
   postType,
   pageData,
   pageUrl,
@@ -43,7 +42,7 @@ const DynamicDeepPage: React.FC<Properties> = ({
   }
 
   if (notFound || !pageData) {
-    return <NotFound message={notFoundMessage} />
+    return <NotFound />
   }
 
   return (

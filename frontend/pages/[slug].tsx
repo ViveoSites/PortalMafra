@@ -15,7 +15,6 @@ const PageLayout = dynamic(() => import('~/layouts/page'), {
 
 interface Properties {
   notFound: boolean
-  notFoundMessage: string
   pageData: any
   pageUrl: string
   globalData: GlobalState
@@ -23,7 +22,6 @@ interface Properties {
 
 const DynamicPage: React.FC<Properties> = ({
   notFound,
-  notFoundMessage,
   pageData,
   pageUrl,
   globalData,
@@ -35,7 +33,7 @@ const DynamicPage: React.FC<Properties> = ({
   }
 
   if (notFound || !pageData) {
-    return <NotFound message={notFoundMessage} />
+    return <NotFound />
   }
 
   return (
