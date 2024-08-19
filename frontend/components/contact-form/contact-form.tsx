@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { useFormik } from 'formik'
 import { m } from 'framer-motion'
 import React, { useState } from 'react'
-import { validateCNPJ, validatePhone } from 'validations-br'
 import * as Yup from 'yup'
 
 import Grid from '~/components/grid'
@@ -23,15 +22,9 @@ interface Properties {
 const FormSchema = Yup.object().shape({
   yourName: Yup.string().required(),
   yourCompany: Yup.string().required(),
-  yourCNPJ: Yup.string()
-    .required()
-    .test('is-cnpj', 'CPNJ inválido', (value) => validateCNPJ(value ?? '')),
+  yourCNPJ: Yup.string().required(),
   yourEmail: Yup.string().email().required(),
-  yourPhone: Yup.string()
-    .required()
-    .test('is-phone', 'Telefone inválido', (value) =>
-      validatePhone(value ?? '')
-    ),
+  yourPhone: Yup.string().required(),
   yourCity: Yup.string().required(),
   yourState: Yup.string().required(),
 })
